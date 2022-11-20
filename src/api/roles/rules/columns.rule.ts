@@ -1,0 +1,1 @@
+export const ROL_MAX_LENGTH = 50;
