@@ -5,5 +5,8 @@ export class UpdateRolUsuarioDto {
   @MaxLength(ROL_MAX_LENGTH)
   @IsString()
   @IsNotEmpty()
-  public rol?: string;
+  rol?: string;
+
+  @IsBoolean()
+  activo?: boolean;
 }

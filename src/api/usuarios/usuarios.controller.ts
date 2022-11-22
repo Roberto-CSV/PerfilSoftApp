@@ -26,16 +26,15 @@ export class UsuariosController {
     return this.usuariosService.getById(id);
   }
 
-  @Get('roles/:rolId')
-  getAllByRolId(@Param('rolId', ParseIntPipe) rolId: number) {
-    return this.usuariosService.getAllByRolId(rolId);
+  @Get('rol/:id')
+  getAllByRolId(@Param('id', ParseIntPipe) id: number) {
+    return this.usuariosService.getAllByRolId(id);
   }
 
-  @Get('semestres/:semestreId')
-  getAllBySemestreId(@Param('semestreId', ParseIntPipe) semestreId: number) {
-    return this.usuariosService.getAllBySemestreId(semestreId);
+  @Get('semestre/:id')
+  getAllBySemestreId(@Param('id', ParseIntPipe) id: number) {
+    return this.usuariosService.getAllBySemestreId(id);
   }
-
 
   @Patch(':id')
   update(
@@ -48,5 +47,15 @@ export class UsuariosController {
   @Delete(':id')
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.usuariosService.delete(id);
+  }
+
+  @Get('/activos/todos')
+  getAllActive(): Promise<Usuario[]> {
+    return this.usuariosService.getAllActive();
+  }
+
+  @Get('/desactivados/todos')
+  getAllDisabled(): Promise<Usuario[]> {
+    return this.usuariosService.getAllDisabled();
   }
 }

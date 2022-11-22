@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IService } from 'src/shared/interfaces/IService.interface';
+import { ENTITIES } from 'src/shared/utilities/entities';
 import {
   existsException,
   notFoundException,
@@ -12,7 +13,7 @@ import { Semestre } from './entities/semestre.entity';
 
 @Injectable()
 export class SemestresService implements IService {
-  private readonly ENTITY_NAME = 'Semestre';
+  private readonly ENTITY_NAME = ENTITIES.Semestre;
 
   constructor(
     @InjectRepository(Semestre)

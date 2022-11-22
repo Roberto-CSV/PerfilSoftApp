@@ -1,5 +1,4 @@
-import { Usuario } from 'src/api/usuarios/entities/usuario.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ROL_MAX_LENGTH } from '../rules/columns.rule';
 
 @Entity({ name: 'rol_usuario' })

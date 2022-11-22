@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IService } from 'src/shared/interfaces/IService.interface';
+import { ENTITIES } from 'src/shared/utilities/entities';
 import { notFoundException } from 'src/shared/utilities/http-exceptions';
 import { Repository } from 'typeorm';
 import { RolesUsuarioService } from '../roles/roles_usuario.service';
@@ -11,7 +12,7 @@ import { Usuario } from './entities/usuario.entity';
 
 @Injectable()
 export class UsuariosService implements IService {
-  private readonly ENTITY_NAME = 'Usuario';
+  private readonly ENTITY_NAME = ENTITIES.Usuario;
 
   constructor(
     @InjectRepository(Usuario)
@@ -68,13 +69,27 @@ export class UsuariosService implements IService {
     return usuarioFound === null ? false : true;
   }
 
-  async getAllByRolId(rolId: number) {
-    await this.rolesService.existsById(rolId);
-    return this.usuariosRepository.findBy({ fk_rol_usuario: rolId });
+  async getAllByRolId(id: number) {
+    const existsRol: boolean = await this.rolesService.existsById(id);
+    if (!existsRol) {
+      throw notFoundException(id, ENTITIES.RolUsuario);
+    }
+    return this.usuariosRepository.findBy({ fk_rol_usuario: id });
   }
 
-  async getAllBySemestreId(semestreId: number) {
-    await this.semestresService.existsById(semestreId);
-    return this.usuariosRepository.findBy({ fk_semestre: semestreId });
+  async getAllBySemestreId(id: number) {
+    const existsSemestre: boolean = await this.semestresService.existsById(id);
+    if (!existsSemestre) {
+      throw notFoundException(id, ENTITIES.Semestre);
+    }
+    return this.usuariosRepository.findBy({ fk_semestre: id });
+  }
+
+  getAllActive() {
+    return this.usuariosRepository.findBy({ activo: true });
+  }
+
+  getAllDisabled() {
+    return this.usuariosRepository.findBy({ activo: false });
   }
 }
