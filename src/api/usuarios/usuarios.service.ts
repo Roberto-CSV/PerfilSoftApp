@@ -18,7 +18,7 @@ export class UsuariosService implements IService {
     private readonly usuariosRepository: Repository<Usuario>,
     private readonly rolesService: RolesService,
   ) {}
-
+  //servicio de creacion
   async create(usuario: CreateUsuarioDto) {
     await this.rolesService.getById(usuario.rolId);
     const newUsuario: Usuario = this.usuariosRepository.create(usuario);
