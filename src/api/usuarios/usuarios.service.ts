@@ -10,6 +10,7 @@ import { Usuario } from './entities/usuario.entity';
 
 @Injectable()
 export class UsuariosService implements IService {
+  //esta es el nombre de la entidad
   private readonly ENTITY_NAME = 'Usuario';
 
   constructor(
