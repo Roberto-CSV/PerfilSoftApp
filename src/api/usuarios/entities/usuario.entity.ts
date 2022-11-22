@@ -1,6 +1,5 @@
-import { RolUsuario } from 'src/api/roles/entities/rol_usuario.entity';
-import { Semestre } from 'src/api/semestres/entities/semestre.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { ENTITIES } from 'src/shared/utilities/entities';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import {
   APELLIDO_MAX_LENGTH,
   CLAVE_MAX_LENGTH,
@@ -8,7 +7,7 @@ import {
   NOMBRE_MAX_LENGTH,
 } from '../rules/columns.rule';
 
-@Entity({ name: 'usuario' })
+@Entity({ name: ENTITIES.Usuario })
 export class Usuario {
   @PrimaryGeneratedColumn()
   id_usuario!: number;

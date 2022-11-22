@@ -1,16 +1,15 @@
 import { ENTITIES } from "src/shared/utilities/entities";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-
-@Entity({name:ENTITIES.Diagnostico})
-export class Diagnostico {
+@Entity({name: ENTITIES.Cuestionario})
+export class Cuestionario {
   @PrimaryGeneratedColumn()
-  id_diagnostico!: number;
+  id_cuestionario: number;
 
   @Column({type: "integer"})
-  fk_usuario: number;
+  fk_semestre: number;
 
   @Column({type: "integer"})
-  fk_respuesta_cuestionario: number;
+  estandar_puntuacion: number;
 
 }

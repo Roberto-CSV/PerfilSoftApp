@@ -1,7 +1,7 @@
-import { Usuario } from 'src/api/usuarios/entities/usuario.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ENTITIES } from 'src/shared/utilities/entities';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({ name: 'semestre' })
+@Entity({ name: ENTITIES.Semestre })
 export class Semestre {
   @PrimaryGeneratedColumn()
   id_semestre!: number;

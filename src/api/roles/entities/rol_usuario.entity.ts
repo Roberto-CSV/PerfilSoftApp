@@ -1,7 +1,8 @@
+import { ENTITIES } from 'src/shared/utilities/entities';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ROL_MAX_LENGTH } from '../rules/columns.rule';
 
-@Entity({ name: 'rol_usuario' })
+@Entity({ name: ENTITIES.RolUsuario })
 export class RolUsuario {
   @PrimaryGeneratedColumn()
   public id_rol_usuario!: number;
