@@ -6,13 +6,17 @@ import { getEnvPath } from './common/helper/env.helper';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmConfigService } from './shared/typeorm/typeorm.service';
 import { ApiModule } from './api/api.module';
+import { dataSource } from './ormconfig';
 
 const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ envFilePath, isGlobal: true }),
-    TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
+    TypeOrmModule.forRoot({
+      ...dataSource.options,
+      keepConnectionAlive: true,
+      autoLoadEntities: true,
+    }),
     ApiModule,
   ],
   controllers: [AppController],

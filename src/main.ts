@@ -4,29 +4,24 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as bodyparser from 'body-parser';
+import { dataSource } from './ormconfig';
+import { env } from 'process';
 
 async function bootstrap() {
-  const app: NestExpressApplication = await NestFactory.create(AppModule);
-  const config: ConfigService = app.get(ConfigService);
-  const port: number = config.get<number>('PORT');
-  const options = new DocumentBuilder()
-    .setTitle('PerfilSoft')
-    .setDescription('Some description')
-    .setVersion('1.0')
-    .build();
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document, {
-    explorer: true,
-    swaggerOptions: {
-      filter: true,
-      showRequestDuration: true
-    }
-  });
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
-
-  await app.listen(port, () => {
-    console.log('[WEB]', config.get<string>('BASE_URL'));
-  });
+  const app = await NestFactory.create(AppModule);
+  app.use(bodyparser.urlencoded({ limit: '100mb', extended: true }));
+  app.use(bodyparser.json({ limit: '100mb' }));
+  app.enableCors();
+  await dataSource
+    .initialize()
+    .then(() => {
+      console.log('Data Source has been initialized!');
+    })
+    .catch((err) => {
+      console.error('Error during Data Source initialization', err);
+    });
+  await app.listen(env.APP_PORT);
 }
 
 bootstrap();
