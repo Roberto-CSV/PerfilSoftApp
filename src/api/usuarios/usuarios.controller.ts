@@ -26,10 +26,16 @@ export class UsuariosController {
     return this.usuariosService.getById(id);
   }
 
-  @Get('roles/:id')
-  getAllByRolId(@Param('id', ParseIntPipe) id: number) {
-    return this.usuariosService.getAllByRolId(id)
+  @Get('roles/:rolId')
+  getAllByRolId(@Param('rolId', ParseIntPipe) rolId: number) {
+    return this.usuariosService.getAllByRolId(rolId);
   }
+
+  @Get('semestres/:semestreId')
+  getAllBySemestreId(@Param('semestreId', ParseIntPipe) semestreId: number) {
+    return this.usuariosService.getAllBySemestreId(semestreId);
+  }
+
 
   @Patch(':id')
   update(

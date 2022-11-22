@@ -1,4 +1,10 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString, MaxLength } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  MaxLength,
+} from 'class-validator';
 import {
   APELLIDO_MAX_LENGTH,
   CLAVE_MAX_LENGTH,
@@ -27,5 +33,8 @@ export class CreateUsuarioDto {
   clave: string;
 
   @IsNumber()
-  rolId: number;
+  fk_rol_usuario: number;
+
+  @IsNumber()
+  fk_semestre?: number;
 }

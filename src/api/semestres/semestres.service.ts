@@ -1,7 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IService } from 'src/shared/interfaces/IService.interface';
-import { existsException, notFoundException } from 'src/shared/utilities/http-exceptions';
+import {
+  existsException,
+  notFoundException,
+} from 'src/shared/utilities/http-exceptions';
 import { Repository } from 'typeorm';
 import { CreateSemestreDto } from './dtos/create-semestre.dto';
 import { UpdateSemestreDto } from './dtos/update-semestre.dto';
@@ -38,7 +41,7 @@ export class SemestresService implements IService {
     }
     return this.semestresRepository.findOne({
       where: {
-        id: id,
+        id_semestre: id,
       },
     });
   }
@@ -48,7 +51,7 @@ export class SemestresService implements IService {
     if (!existsSemestre) {
       throw notFoundException(id, this.ENTITY_NAME);
     }
-    return this.semestresRepository.update({ id }, semestre);
+    return this.semestresRepository.update({ id_semestre: id }, semestre);
   }
 
   async delete(id: number) {
@@ -56,13 +59,13 @@ export class SemestresService implements IService {
     if (!existsSemestre) {
       throw notFoundException(id, this.ENTITY_NAME);
     }
-    return this.semestresRepository.delete({ id });
+    return this.semestresRepository.delete({ id_semestre: id });
   }
 
   async existsById(id: number): Promise<boolean> {
     const semestreFound = await this.semestresRepository.findOne({
       where: {
-        id: id,
+        id_semestre: id,
       },
     });
     return semestreFound === null ? false : true;

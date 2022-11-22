@@ -2,10 +2,10 @@ import { Usuario } from 'src/api/usuarios/entities/usuario.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ROL_MAX_LENGTH } from '../rules/columns.rule';
 
-@Entity({ name: 'ROLES' })
-export class Rol {
+@Entity({ name: 'rol_usuario' })
+export class RolUsuario {
   @PrimaryGeneratedColumn()
-  public id!: number;
+  public id_rol_usuario!: number;
 
   @Column({ type: 'varchar', length: ROL_MAX_LENGTH, unique: true })
   public rol: string;
@@ -13,6 +13,4 @@ export class Rol {
   @Column({ type: 'boolean', default: true })
   public activo: boolean;
 
-  @OneToMany(() => Usuario, usuario => usuario.rol)
-  usuarios: Usuario[]
 }

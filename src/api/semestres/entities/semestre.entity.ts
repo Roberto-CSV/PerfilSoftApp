@@ -1,9 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Usuario } from 'src/api/usuarios/entities/usuario.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({name:'SEMESTRES'})
+@Entity({ name: 'semestre' })
 export class Semestre {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id_semestre!: number;
 
   @Column({ type: 'integer', unique: true })
   semestre: number;

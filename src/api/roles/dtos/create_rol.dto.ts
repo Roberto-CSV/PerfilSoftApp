@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
 import { ROL_MAX_LENGTH } from '../rules/columns.rule';
 
-export class CreateRolDto {
+export class CreateRolUsuarioDto {
   @MaxLength(ROL_MAX_LENGTH)
   @IsString()
   @IsNotEmpty()
