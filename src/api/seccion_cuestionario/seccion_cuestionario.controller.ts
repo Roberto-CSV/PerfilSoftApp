@@ -11,7 +11,7 @@ import { SeccionCuestionarioService } from './seccion_cuestionario.service';
 import { CreateSeccionCuestionarioDto } from './dto/create-seccion_cuestionario.dto';
 import { UpdateSeccionCuestionarioDto } from './dto/update-seccion_cuestionario.dto';
 
-@Controller('seccion-cuestionario')
+@Controller()
 export class SeccionCuestionarioController {
   constructor(
     private readonly seccionCuestionarioService: SeccionCuestionarioService,

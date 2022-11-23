@@ -11,7 +11,7 @@ import { HabilidadesService } from './habilidades.service';
 import { CreateHabilidadeDto } from './dto/create-habilidade.dto';
 import { UpdateHabilidadeDto } from './dto/update-habilidade.dto';
 
-@Controller('habilidades')
+@Controller()
 export class HabilidadesController {
   constructor(private readonly habilidadesService: HabilidadesService) {}
 

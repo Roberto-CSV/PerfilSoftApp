@@ -11,7 +11,7 @@ import { OpcionRespuestaService } from './opcion_respuesta.service';
 import { CreateOpcionRespuestaDto } from './dto/create-opcion_respuesta.dto';
 import { UpdateOpcionRespuestaDto } from './dto/update-opcion_respuesta.dto';
 
-@Controller('opcion-respuesta')
+@Controller()
 export class OpcionRespuestaController {
   constructor(
     private readonly opcionRespuestaService: OpcionRespuestaService,

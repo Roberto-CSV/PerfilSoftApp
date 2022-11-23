@@ -11,7 +11,7 @@ import { RecomendacionService } from './recomendacion.service';
 import { CreateRecomendacionDto } from './dto/create-recomendacion.dto';
 import { UpdateRecomendacionDto } from './dto/update-recomendacion.dto';
 
-@Controller('recomendacion')
+@Controller()
 export class RecomendacionController {
   constructor(private readonly recomendacionService: RecomendacionService) {}
 

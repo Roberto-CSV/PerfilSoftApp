@@ -11,7 +11,7 @@ import { DiagnosticoRecomendacionService } from './diagnostico_recomendacion.ser
 import { CreateDiagnosticoRecomendacionDto } from './dto/create-diagnostico_recomendacion.dto';
 import { UpdateDiagnosticoRecomendacionDto } from './dto/update-diagnostico_recomendacion.dto';
 
-@Controller('diagnostico-recomendacion')
+@Controller()
 export class DiagnosticoRecomendacionController {
   constructor(
     private readonly diagnosticoRecomendacionService: DiagnosticoRecomendacionService,
