@@ -12,7 +12,7 @@ import { CreateRespeustaCuestionarioDto } from './dtos/create-respuesta-cuestion
 import { RespeustaCuestionario } from './entities/respuesta-cuestionario.entity';
 import { RespuestasCuestionariosService } from './respuestas-cuestionarios.service';
 
-@Controller('respuestas-cuestionarios')
+@Controller()
 export class RespuestasCuestionariosController {
   constructor(
     private readonly respuestasCuestionariosService: RespuestasCuestionariosService,
@@ -30,7 +30,7 @@ export class RespuestasCuestionariosController {
     return this.respuestasCuestionariosService.getAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   getById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<RespeustaCuestionario> {

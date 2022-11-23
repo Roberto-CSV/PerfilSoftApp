@@ -1,9 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { RolIngenieroService } from './rol-ingeniero.service';
 import { CreateRolIngenieroDto } from './dto/create-rol-ingeniero.dto';
 import { UpdateRolIngenieroDto } from './dto/update-rol-ingeniero.dto';
 
-@Controller('rol-ingeniero')
+@Controller()
 export class RolIngenieroController {
   constructor(private readonly rolIngenieroService: RolIngenieroService) {}
 
@@ -17,13 +25,16 @@ export class RolIngenieroController {
     return this.rolIngenieroService.findAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   findOne(@Param('id') id: string) {
     return this.rolIngenieroService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRolIngenieroDto: UpdateRolIngenieroDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateRolIngenieroDto: UpdateRolIngenieroDto,
+  ) {
     return this.rolIngenieroService.update(+id, updateRolIngenieroDto);
   }
 

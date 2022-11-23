@@ -16,7 +16,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { DeleteResult, UpdateResult } from 'typeorm';
 
 @ApiTags('Roles')
-@Controller('roles')
+@Controller()
 export class RolesUsuarioController {
   constructor(private readonly rolesService: RolesUsuarioService) {}
 
@@ -30,7 +30,7 @@ export class RolesUsuarioController {
     return this.rolesService.getAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   getById(@Param('id', ParseIntPipe) id: number): Promise<RolUsuario> {
     return this.rolesService.getById(id);
   }

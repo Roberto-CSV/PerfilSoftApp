@@ -5,7 +5,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApiModule } from './api/api.module';
 import { dataSource } from './ormconfig';
-
+import { RouterModule } from '@nestjs/core';
+import { routes } from './routes';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { dataSource } from './ormconfig';
       keepConnectionAlive: true,
       autoLoadEntities: true,
     }),
+    RouterModule.register(routes),
     ApiModule,
   ],
   controllers: [AppController],

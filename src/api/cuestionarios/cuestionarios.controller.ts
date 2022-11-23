@@ -1,15 +1,26 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CuestionariosService } from './cuestionarios.service';
 import { CreateCuestionarioDto } from './dtos/create_cuestionario.dto';
 import { UpdateCuestionarioDto } from './dtos/update_cuestionario.dto';
 import { Cuestionario } from './entities/cuestionario.entity';
 
-@Controller('cuestionarios')
+@Controller()
 export class CuestionariosController {
   constructor(private readonly cuestionariosService: CuestionariosService) {}
 
   @Post()
-  create(@Body() newCuestionario: CreateCuestionarioDto): Promise<Cuestionario> {
+  create(
+    @Body() newCuestionario: CreateCuestionarioDto,
+  ): Promise<Cuestionario> {
     return this.cuestionariosService.create(newCuestionario);
   }
 
@@ -18,7 +29,7 @@ export class CuestionariosController {
     return this.cuestionariosService.getAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   getByid(@Param('id', ParseIntPipe) id: number) {
     return this.cuestionariosService.getById(id);
   }
@@ -40,5 +51,4 @@ export class CuestionariosController {
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.cuestionariosService.delete(id);
   }
-
 }

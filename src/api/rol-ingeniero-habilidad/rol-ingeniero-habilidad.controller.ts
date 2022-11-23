@@ -1,15 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { RolIngenieroHabilidadService } from './rol-ingeniero-habilidad.service';
 import { CreateRolIngenieroHabilidadDto } from './dto/create-rol-ingeniero-habilidad.dto';
 import { UpdateRolIngenieroHabilidadDto } from './dto/update-rol-ingeniero-habilidad.dto';
 
-@Controller('rol-ingeniero-habilidad')
+@Controller()
 export class RolIngenieroHabilidadController {
-  constructor(private readonly rolIngenieroHabilidadService: RolIngenieroHabilidadService) {}
+  constructor(
+    private readonly rolIngenieroHabilidadService: RolIngenieroHabilidadService,
+  ) {}
 
   @Post()
-  create(@Body() createRolIngenieroHabilidadDto: CreateRolIngenieroHabilidadDto) {
-    return this.rolIngenieroHabilidadService.create(createRolIngenieroHabilidadDto);
+  create(
+    @Body() createRolIngenieroHabilidadDto: CreateRolIngenieroHabilidadDto,
+  ) {
+    return this.rolIngenieroHabilidadService.create(
+      createRolIngenieroHabilidadDto,
+    );
   }
 
   @Get()
@@ -17,14 +31,20 @@ export class RolIngenieroHabilidadController {
     return this.rolIngenieroHabilidadService.findAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   findOne(@Param('id') id: string) {
     return this.rolIngenieroHabilidadService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRolIngenieroHabilidadDto: UpdateRolIngenieroHabilidadDto) {
-    return this.rolIngenieroHabilidadService.update(+id, updateRolIngenieroHabilidadDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateRolIngenieroHabilidadDto: UpdateRolIngenieroHabilidadDto,
+  ) {
+    return this.rolIngenieroHabilidadService.update(
+      +id,
+      updateRolIngenieroHabilidadDto,
+    );
   }
 
   @Delete(':id')

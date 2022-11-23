@@ -14,7 +14,7 @@ import { CreateDiagnosticoDto } from './dtos/create-diagnostico.dto';
 import { UpdateDiagnosticoDto } from './dtos/update-diagnostico.dto';
 import { Diagnostico } from './entities/diagnostico.entity';
 
-@Controller('diagnosticos')
+@Controller()
 export class DiagnosticosController {
   constructor(private readonly diagnosticosService: DiagnosticosService) {}
 
@@ -28,7 +28,7 @@ export class DiagnosticosController {
     return this.diagnosticosService.getAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   getById(@Param('id', ParseIntPipe) id: number): Promise<Diagnostico> {
     return this.diagnosticosService.getById(id);
   }

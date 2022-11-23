@@ -1,16 +1,33 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpException,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CreateSemestreDto } from './dtos/create-semestre.dto';
 import { UpdateSemestreDto } from './dtos/update-semestre.dto';
 import { Semestre } from './entities/semestre.entity';
 import { SemestresService } from './semestres.service';
-import { ApiTags, ApiOperation, ApiResponse, ApiBody, ApiParam } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBody,
+  ApiParam,
+} from '@nestjs/swagger';
 
 @ApiTags('Semestres')
-@Controller('semestres')
+@Controller()
 export class SemestresController {
   constructor(private readonly semestresService: SemestresService) {}
 
-  @Post()
+  @Post('create')
   @ApiOperation({ summary: 'Create new semestre' })
   @ApiBody({
     schema: {
@@ -54,7 +71,7 @@ export class SemestresController {
     return this.semestresService.getAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   @ApiOperation({ summary: 'Get one semestre by id' })
   @ApiParam({
     name: 'id',
@@ -74,7 +91,7 @@ export class SemestresController {
     description: 'Internal server error',
   })
   getById(@Param('id', ParseIntPipe) id: number) {
-    return this.semestresService.getById(id);;
+    return this.semestresService.getById(id);
   }
 
   @Patch(':id')
@@ -135,6 +152,6 @@ export class SemestresController {
     description: 'Internal server error',
   })
   delete(@Param('id', ParseIntPipe) id: number) {
-    return this.semestresService.delete(id);;
+    return this.semestresService.delete(id);
   }
 }

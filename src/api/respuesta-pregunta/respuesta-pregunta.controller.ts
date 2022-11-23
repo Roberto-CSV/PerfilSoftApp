@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { RespuestaPreguntaService } from './respuesta-pregunta.service';
 import { CreateRespuestaPreguntaDto } from './dto/create-respuesta-pregunta.dto';
 import { UpdateRespuestaPreguntaDto } from './dto/update-respuesta-pregunta.dto';
 
-@Controller('respuesta-pregunta')
+@Controller()
 export class RespuestaPreguntaController {
-  constructor(private readonly respuestaPreguntaService: RespuestaPreguntaService) {}
+  constructor(
+    private readonly respuestaPreguntaService: RespuestaPreguntaService,
+  ) {}
 
   @Post()
   create(@Body() createRespuestaPreguntaDto: CreateRespuestaPreguntaDto) {
@@ -17,14 +27,20 @@ export class RespuestaPreguntaController {
     return this.respuestaPreguntaService.findAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   findOne(@Param('id') id: string) {
     return this.respuestaPreguntaService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRespuestaPreguntaDto: UpdateRespuestaPreguntaDto) {
-    return this.respuestaPreguntaService.update(+id, updateRespuestaPreguntaDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateRespuestaPreguntaDto: UpdateRespuestaPreguntaDto,
+  ) {
+    return this.respuestaPreguntaService.update(
+      +id,
+      updateRespuestaPreguntaDto,
+    );
   }
 
   @Delete(':id')

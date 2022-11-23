@@ -1,14 +1,22 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CreateUsuarioDto } from './dtos/create-usuario.dto';
 import { UpdateUsuarioDto } from './dtos/update-usuario.dto';
 import { Usuario } from './entities/usuario.entity';
 import { UsuariosService } from './usuarios.service';
-import { ApiTags } from "@nestjs/swagger";
+import { ApiTags } from '@nestjs/swagger';
 import { DeleteResult, UpdateResult } from 'typeorm';
 
-
 @ApiTags('Usuarios')
-@Controller('usuarios')
+@Controller()
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
@@ -22,7 +30,7 @@ export class UsuariosController {
     return this.usuariosService.getAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   getByid(@Param('id', ParseIntPipe) id: number): Promise<Usuario> {
     return this.usuariosService.getById(id);
   }
