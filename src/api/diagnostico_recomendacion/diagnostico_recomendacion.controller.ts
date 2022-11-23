@@ -1,15 +1,30 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { DiagnosticoRecomendacionService } from './diagnostico_recomendacion.service';
 import { CreateDiagnosticoRecomendacionDto } from './dto/create-diagnostico_recomendacion.dto';
 import { UpdateDiagnosticoRecomendacionDto } from './dto/update-diagnostico_recomendacion.dto';
 
 @Controller('diagnostico-recomendacion')
 export class DiagnosticoRecomendacionController {
-  constructor(private readonly diagnosticoRecomendacionService: DiagnosticoRecomendacionService) {}
+  constructor(
+    private readonly diagnosticoRecomendacionService: DiagnosticoRecomendacionService,
+  ) {}
 
   @Post()
-  create(@Body() createDiagnosticoRecomendacionDto: CreateDiagnosticoRecomendacionDto) {
-    return this.diagnosticoRecomendacionService.create(createDiagnosticoRecomendacionDto);
+  create(
+    @Body()
+    createDiagnosticoRecomendacionDto: CreateDiagnosticoRecomendacionDto,
+  ) {
+    return this.diagnosticoRecomendacionService.create(
+      createDiagnosticoRecomendacionDto,
+    );
   }
 
   @Get()
@@ -17,14 +32,21 @@ export class DiagnosticoRecomendacionController {
     return this.diagnosticoRecomendacionService.findAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   findOne(@Param('id') id: string) {
     return this.diagnosticoRecomendacionService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDiagnosticoRecomendacionDto: UpdateDiagnosticoRecomendacionDto) {
-    return this.diagnosticoRecomendacionService.update(+id, updateDiagnosticoRecomendacionDto);
+  update(
+    @Param('id') id: string,
+    @Body()
+    updateDiagnosticoRecomendacionDto: UpdateDiagnosticoRecomendacionDto,
+  ) {
+    return this.diagnosticoRecomendacionService.update(
+      +id,
+      updateDiagnosticoRecomendacionDto,
+    );
   }
 
   @Delete(':id')

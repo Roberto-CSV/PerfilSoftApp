@@ -25,7 +25,7 @@ export class TipoHabilidadController {
     return this.tipoHabilidadService.findAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   findOne(@Param('id') id: number) {
     return this.tipoHabilidadService.findOne(id);
   }

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CuestionarioService } from './cuestionario.service';
 import { CreateCuestionarioDto } from './dto/create-cuestionario.dto';
 import { UpdateCuestionarioDto } from './dto/update-cuestionario.dto';
@@ -17,13 +25,16 @@ export class CuestionarioController {
     return this.cuestionarioService.findAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   findOne(@Param('id') id: string) {
     return this.cuestionarioService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCuestionarioDto: UpdateCuestionarioDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCuestionarioDto: UpdateCuestionarioDto,
+  ) {
     return this.cuestionarioService.update(+id, updateCuestionarioDto);
   }
 

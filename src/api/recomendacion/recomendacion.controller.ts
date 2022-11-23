@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { RecomendacionService } from './recomendacion.service';
 import { CreateRecomendacionDto } from './dto/create-recomendacion.dto';
 import { UpdateRecomendacionDto } from './dto/update-recomendacion.dto';
@@ -17,13 +25,16 @@ export class RecomendacionController {
     return this.recomendacionService.findAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   findOne(@Param('id') id: string) {
     return this.recomendacionService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRecomendacionDto: UpdateRecomendacionDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateRecomendacionDto: UpdateRecomendacionDto,
+  ) {
     return this.recomendacionService.update(+id, updateRecomendacionDto);
   }
 

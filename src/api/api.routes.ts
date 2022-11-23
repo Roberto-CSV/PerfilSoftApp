@@ -9,6 +9,13 @@ import { DiagnosticosModule } from './diagnosticos/diagnosticos.module';
 import { DiagnosticoRolIngenieroModule } from './diagnostico-rol-ingeniero/diagnostico-rol-ingeniero.module';
 import { CuestionariosModule } from './cuestionarios/cuestionarios.module';
 import { CuestionarioSeccionCuestionarioModule } from './cuestionario-seccion-cuestionario/cuestionario-seccion-cuestionario.module';
+import { DiagnosticoRecomendacionModule } from './diagnostico_recomendacion/diagnostico_recomendacion.module';
+import { SeccionCuestionarioModule } from './seccion_cuestionario/seccion_cuestionario.module';
+import { RecomendacionModule } from './recomendacion/recomendacion.module';
+import { TipoHabilidadModule } from './tipo_habilidad/tipo_habilidad.module';
+import { HabilidadesModule } from './habilidades/habilidades.module';
+import { OpcionRespuestaModule } from './opcion_respuesta/opcion_respuesta.module';
+import { PreguntaModule } from './pregunta/pregunta.module';
 export const apiRoutes = [
   {
     path: 'usuario',
@@ -53,5 +60,34 @@ export const apiRoutes = [
   {
     path: 'cuestionario-seccion-cuestionario',
     module: CuestionarioSeccionCuestionarioModule,
+  },
+  {
+    path: 'diagnostico-recomendacion',
+    module: DiagnosticoRecomendacionModule,
+  },
+
+  {
+    path: 'seccion-cuestionario',
+    module: SeccionCuestionarioModule,
+  },
+  {
+    path: 'recomendacion',
+    module: RecomendacionModule,
+  },
+  {
+    path: 'tipo-habilidad',
+    module: TipoHabilidadModule,
+  },
+  {
+    path: 'habilidad',
+    module: HabilidadesModule,
+  },
+  {
+    path: 'opcion-respuesta',
+    module: OpcionRespuestaModule,
+  },
+  {
+    path: 'pregunta',
+    module: PreguntaModule,
   },
 ];

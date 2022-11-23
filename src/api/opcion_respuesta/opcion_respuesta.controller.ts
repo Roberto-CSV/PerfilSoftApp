@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { OpcionRespuestaService } from './opcion_respuesta.service';
 import { CreateOpcionRespuestaDto } from './dto/create-opcion_respuesta.dto';
 import { UpdateOpcionRespuestaDto } from './dto/update-opcion_respuesta.dto';
 
 @Controller('opcion-respuesta')
 export class OpcionRespuestaController {
-  constructor(private readonly opcionRespuestaService: OpcionRespuestaService) {}
+  constructor(
+    private readonly opcionRespuestaService: OpcionRespuestaService,
+  ) {}
 
   @Post()
   create(@Body() createOpcionRespuestaDto: CreateOpcionRespuestaDto) {
@@ -17,13 +27,16 @@ export class OpcionRespuestaController {
     return this.opcionRespuestaService.findAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   findOne(@Param('id') id: string) {
     return this.opcionRespuestaService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOpcionRespuestaDto: UpdateOpcionRespuestaDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateOpcionRespuestaDto: UpdateOpcionRespuestaDto,
+  ) {
     return this.opcionRespuestaService.update(+id, updateOpcionRespuestaDto);
   }
 

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { HabilidadesService } from './habilidades.service';
 import { CreateHabilidadeDto } from './dto/create-habilidade.dto';
 import { UpdateHabilidadeDto } from './dto/update-habilidade.dto';
@@ -17,13 +25,16 @@ export class HabilidadesController {
     return this.habilidadesService.findAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   findOne(@Param('id') id: string) {
     return this.habilidadesService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateHabilidadeDto: UpdateHabilidadeDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateHabilidadeDto: UpdateHabilidadeDto,
+  ) {
     return this.habilidadesService.update(+id, updateHabilidadeDto);
   }
 

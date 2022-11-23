@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { SeccionCuestionarioService } from './seccion_cuestionario.service';
 import { CreateSeccionCuestionarioDto } from './dto/create-seccion_cuestionario.dto';
 import { UpdateSeccionCuestionarioDto } from './dto/update-seccion_cuestionario.dto';
 
 @Controller('seccion-cuestionario')
 export class SeccionCuestionarioController {
-  constructor(private readonly seccionCuestionarioService: SeccionCuestionarioService) {}
+  constructor(
+    private readonly seccionCuestionarioService: SeccionCuestionarioService,
+  ) {}
 
   @Post()
   create(@Body() createSeccionCuestionarioDto: CreateSeccionCuestionarioDto) {
@@ -17,14 +27,20 @@ export class SeccionCuestionarioController {
     return this.seccionCuestionarioService.findAll();
   }
 
-  @Get(':id')
+  @Get('byId/:id')
   findOne(@Param('id') id: string) {
     return this.seccionCuestionarioService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSeccionCuestionarioDto: UpdateSeccionCuestionarioDto) {
-    return this.seccionCuestionarioService.update(+id, updateSeccionCuestionarioDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateSeccionCuestionarioDto: UpdateSeccionCuestionarioDto,
+  ) {
+    return this.seccionCuestionarioService.update(
+      +id,
+      updateSeccionCuestionarioDto,
+    );
   }
 
   @Delete(':id')
