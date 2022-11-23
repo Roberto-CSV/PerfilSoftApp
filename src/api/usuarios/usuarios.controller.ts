@@ -4,6 +4,7 @@ import { UpdateUsuarioDto } from './dtos/update-usuario.dto';
 import { Usuario } from './entities/usuario.entity';
 import { UsuariosService } from './usuarios.service';
 import { ApiTags } from "@nestjs/swagger";
+import { DeleteResult, UpdateResult } from 'typeorm';
 
 
 @ApiTags('Usuarios')
@@ -22,25 +23,42 @@ export class UsuariosController {
   }
 
   @Get(':id')
-  getByid(@Param('id', ParseIntPipe) id: number) {
+  getByid(@Param('id', ParseIntPipe) id: number): Promise<Usuario> {
     return this.usuariosService.getById(id);
   }
 
-  @Get('roles/:id')
-  getAllByRolId(@Param('id', ParseIntPipe) id: number) {
-    return this.usuariosService.getAllByRolId(id)
+  @Get('rol/:id')
+  getAllByRolId(@Param('id', ParseIntPipe) id: number): Promise<Usuario[]> {
+    return this.usuariosService.getAllByRolId(id);
+  }
+
+  @Get('semestre/:id')
+  getAllBySemestreId(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<Usuario[]> {
+    return this.usuariosService.getAllBySemestreId(id);
   }
 
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() usuario: UpdateUsuarioDto,
-  ) {
+  ): Promise<UpdateResult> {
     return this.usuariosService.update(id, usuario);
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
+  delete(@Param('id', ParseIntPipe) id: number): Promise<DeleteResult> {
     return this.usuariosService.delete(id);
+  }
+
+  @Get('/activos/todos')
+  getAllActive(): Promise<Usuario[]> {
+    return this.usuariosService.getAllActive();
+  }
+
+  @Get('/desactivados/todos')
+  getAllDisabled(): Promise<Usuario[]> {
+    return this.usuariosService.getAllDisabled();
   }
 }

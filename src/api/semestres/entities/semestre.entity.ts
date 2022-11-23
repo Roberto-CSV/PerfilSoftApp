@@ -1,10 +1,11 @@
 import { Cuestionario } from 'src/api/cuestionario/entities/cuestionario.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ENTITIES } from 'src/shared/utilities/entities';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({ name: 'SEMESTRES' })
+@Entity({ name: ENTITIES.Semestre })
 export class Semestre {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id_semestre!: number;
 
   @Column({ type: 'integer', unique: true })
   semestre: number;
