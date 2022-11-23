@@ -21,10 +21,21 @@ export class UsuariosService implements IService {
     private readonly semestresService: SemestresService,
   ) {}
 
-  async create(usuario: CreateUsuarioDto) {
-    await this.rolesService.getById(usuario.fk_rol_usuario);
-    const newUsuario: Usuario = this.usuariosRepository.create(usuario);
-    return this.usuariosRepository.save(newUsuario);
+  async create(newUsuario: CreateUsuarioDto) {
+    const existsRol: boolean = await this.rolesService.existsById(
+      newUsuario.fk_rol_usuario,
+    );
+    const existsSemestre: boolean = await this.semestresService.existsById(
+      newUsuario.fk_semestre,
+    );
+    if (!existsRol) {
+      throw notFoundException(newUsuario.fk_rol_usuario, ENTITIES.RolUsuario);
+    }
+    if (!existsSemestre) {
+      throw notFoundException(newUsuario.fk_semestre, ENTITIES.Semestre);
+    }
+    const usuario: Usuario = this.usuariosRepository.create(newUsuario);
+    return this.usuariosRepository.save(usuario);
   }
 
   getAll() {
@@ -69,7 +80,7 @@ export class UsuariosService implements IService {
     return usuarioFound === null ? false : true;
   }
 
-  async getAllByRolId(id: number) {
+  async getAllByRolId(id: number): Promise<Usuario[]> {
     const existsRol: boolean = await this.rolesService.existsById(id);
     if (!existsRol) {
       throw notFoundException(id, ENTITIES.RolUsuario);
@@ -77,7 +88,7 @@ export class UsuariosService implements IService {
     return this.usuariosRepository.findBy({ fk_rol_usuario: id });
   }
 
-  async getAllBySemestreId(id: number) {
+  async getAllBySemestreId(id: number): Promise<Usuario[]> {
     const existsSemestre: boolean = await this.semestresService.existsById(id);
     if (!existsSemestre) {
       throw notFoundException(id, ENTITIES.Semestre);
@@ -85,11 +96,11 @@ export class UsuariosService implements IService {
     return this.usuariosRepository.findBy({ fk_semestre: id });
   }
 
-  getAllActive() {
+  getAllActive(): Promise<Usuario[]> {
     return this.usuariosRepository.findBy({ activo: true });
   }
 
-  getAllDisabled() {
+  getAllDisabled(): Promise<Usuario[]> {
     return this.usuariosRepository.findBy({ activo: false });
   }
 }

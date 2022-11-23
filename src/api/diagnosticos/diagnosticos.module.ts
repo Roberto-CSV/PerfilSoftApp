@@ -3,10 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DiagnosticosService } from './diagnosticos.service';
 import { Diagnostico } from './entities/diagnostico.entity';
 import { DiagnosticosController } from './diagnosticos.controller';
-import { UsuariosModule } from '../usuarios/usuarios.module';
+import { RespuestasCuestionariosModule } from '../respuestas_cuestionarios/respuestas-cuestionarios.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Diagnostico]), UsuariosModule],
+  imports: [TypeOrmModule.forFeature([Diagnostico]), RespuestasCuestionariosModule],
   providers: [DiagnosticosService],
   exports: [DiagnosticosService],
   controllers: [DiagnosticosController]

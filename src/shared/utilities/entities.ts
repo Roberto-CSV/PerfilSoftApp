@@ -3,5 +3,6 @@ export const ENTITIES = {
   Semestre: 'semestre',
   Usuario: 'usuario',
   Diagnostico: 'diagnostico',
-  Cuestionario: 'cuestionario'
-}
+  Cuestionario: 'cuestionario',
+  RespeustaCuestionario: 'respuesta_cuestionario',
+};

@@ -46,8 +46,10 @@ export class DiagnosticosController {
     return this.diagnosticosService.delete(id);
   }
 
-  @Get('usuarios/:id')
-  getAllByUsuarioId(@Param('id', ParseIntPipe) id: number):Promise<Diagnostico[]> {
-    return this.diagnosticosService.getAllByUsuarioId(id);
+  @Get('respuesta_cuestonario/:id')
+  getByRespuestaCuestionarioId(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<Diagnostico> {
+    return this.diagnosticosService.getByRespuestaCuestionarioId(id);
   }
 }

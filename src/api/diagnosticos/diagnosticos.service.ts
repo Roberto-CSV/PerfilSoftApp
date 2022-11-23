@@ -4,7 +4,7 @@ import { IService } from 'src/shared/interfaces/IService.interface';
 import { ENTITIES } from 'src/shared/utilities/entities';
 import { notFoundException } from 'src/shared/utilities/http-exceptions';
 import { Repository, UpdateResult } from 'typeorm';
-import { Usuario } from '../usuarios/entities/usuario.entity';
+import { RespuestasCuestionariosService } from '../respuestas_cuestionarios/respuestas-cuestionarios.service';
 import { UsuariosService } from '../usuarios/usuarios.service';
 import { CreateDiagnosticoDto } from './dtos/create-diagnostico.dto';
 import { UpdateDiagnosticoDto } from './dtos/update-diagnostico.dto';
@@ -17,12 +17,13 @@ export class DiagnosticosService implements IService {
   constructor(
     @InjectRepository(Diagnostico)
     private readonly diagnosticosRepository: Repository<Diagnostico>,
-    private readonly usuariosService: UsuariosService,
+    private readonly respuestasCuestionariosService: RespuestasCuestionariosService,
   ) {}
 
-  create(diagnostico: CreateDiagnosticoDto): Promise<Diagnostico> {
-    const newDiagnostico: Diagnostico = this.diagnosticosRepository.create();
-    return this.diagnosticosRepository.save(newDiagnostico);
+  create(newDiagnostico: CreateDiagnosticoDto): Promise<Diagnostico> {
+    const diagnostico: Diagnostico =
+      this.diagnosticosRepository.create(newDiagnostico);
+    return this.diagnosticosRepository.save(diagnostico);
   }
 
   getAll(): Promise<Diagnostico[]> {
@@ -74,11 +75,14 @@ export class DiagnosticosService implements IService {
     return foundDiagnostico === null ? false : true;
   }
 
-  async getAllByUsuarioId(id: number): Promise<Diagnostico[]> {
-    const existsUsuario: boolean = await this.usuariosService.existsById(id);
-    if (!existsUsuario) {
-      throw notFoundException(id, ENTITIES.Usuario);
+  async getByRespuestaCuestionarioId(id: number): Promise<Diagnostico> {
+    const existsRespuestaCuestionario: boolean =
+      await this.respuestasCuestionariosService.existsById(id);
+    if (!existsRespuestaCuestionario) {
+      throw notFoundException(id, ENTITIES.RespeustaCuestionario);
     }
-    return this.diagnosticosRepository.findBy({ id_diagnostico: id });
+    return this.diagnosticosRepository.findOne({
+      where: { fk_respuesta_cuestionario: id },
+    });
   }
 }

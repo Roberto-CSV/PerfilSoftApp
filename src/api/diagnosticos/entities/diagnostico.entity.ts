@@ -8,9 +8,6 @@ export class Diagnostico {
   id_diagnostico!: number;
 
   @Column({type: "integer"})
-  fk_usuario: number;
-
-  @Column({type: "integer"})
   fk_respuesta_cuestionario: number;
 
 }
