@@ -1,4 +1,3 @@
-import { Cuestionario } from 'src/api/cuestionario/entities/cuestionario.entity';
 import { ENTITIES } from 'src/shared/utilities/entities';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 

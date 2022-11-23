@@ -9,8 +9,6 @@ import { PreguntaModule } from './pregunta/pregunta.module';
 import { SeccionCuestionarioModule } from './seccion_cuestionario/seccion_cuestionario.module';
 import { OpcionRespuestaModule } from './opcion_respuesta/opcion_respuesta.module';
 import { RecomendacionModule } from './recomendacion/recomendacion.module';
-import { CuestionarioModule } from './cuestionario/cuestionario.module';
-import { DiagnosticoModule } from './diagnostico/diagnostico.module';
 import { DiagnosticoRecomendacionModule } from './diagnostico_recomendacion/diagnostico_recomendacion.module';
 import { DiagnosticosModule } from './diagnosticos/diagnosticos.module';
 import { CuestionariosModule } from './cuestionarios/cuestionarios.module';
@@ -32,8 +30,6 @@ import { CuestionarioSeccionCuestionarioModule } from './cuestionario-seccion-cu
     SeccionCuestionarioModule,
     OpcionRespuestaModule,
     RecomendacionModule,
-    CuestionarioModule,
-    DiagnosticoModule,
     DiagnosticoRecomendacionModule,
     RolIngenieroModule,
     DiagnosticoRolIngenieroModule,
