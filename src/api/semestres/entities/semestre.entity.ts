@@ -1,3 +1,4 @@
+import { Cuestionario } from 'src/api/cuestionario/entities/cuestionario.entity';
 import { ENTITIES } from 'src/shared/utilities/entities';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -8,5 +9,4 @@ export class Semestre {
 
   @Column({ type: 'integer', unique: true })
   semestre: number;
-
 }

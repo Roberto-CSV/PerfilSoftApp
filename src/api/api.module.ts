@@ -3,6 +3,15 @@ import { RolesModule } from './roles/roles_usuario.module';
 import { SemestresController } from './semestres/semestres.controller';
 import { SemestresModule } from './semestres/semestres.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
+import { TipoHabilidadModule } from './tipo_habilidad/tipo_habilidad.module';
+import { HabilidadesModule } from './habilidades/habilidades.module';
+import { PreguntaModule } from './pregunta/pregunta.module';
+import { SeccionCuestionarioModule } from './seccion_cuestionario/seccion_cuestionario.module';
+import { OpcionRespuestaModule } from './opcion_respuesta/opcion_respuesta.module';
+import { RecomendacionModule } from './recomendacion/recomendacion.module';
+import { CuestionarioModule } from './cuestionario/cuestionario.module';
+import { DiagnosticoModule } from './diagnostico/diagnostico.module';
+import { DiagnosticoRecomendacionModule } from './diagnostico_recomendacion/diagnostico_recomendacion.module';
 import { DiagnosticosModule } from './diagnosticos/diagnosticos.module';
 import { CuestionariosModule } from './cuestionarios/cuestionarios.module';
 import { RespuestasCuestionariosModule } from './respuestas_cuestionarios/respuestas-cuestionarios.module';
@@ -17,6 +26,15 @@ import { CuestionarioSeccionCuestionarioModule } from './cuestionario-seccion-cu
     RolesModule,
     SemestresModule,
     UsuariosModule,
+    HabilidadesModule,
+    TipoHabilidadModule,
+    PreguntaModule,
+    SeccionCuestionarioModule,
+    OpcionRespuestaModule,
+    RecomendacionModule,
+    CuestionarioModule,
+    DiagnosticoModule,
+    DiagnosticoRecomendacionModule,
     RolIngenieroModule,
     DiagnosticoRolIngenieroModule,
     RolIngenieroHabilidadModule,

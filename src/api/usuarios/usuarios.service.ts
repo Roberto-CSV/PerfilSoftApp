@@ -12,7 +12,12 @@ import { Usuario } from './entities/usuario.entity';
 
 @Injectable()
 export class UsuariosService implements IService {
+<<<<<<< HEAD
+  //esta es el nombre de la entidad
+  private readonly ENTITY_NAME = 'Usuario';
+=======
   private readonly ENTITY_NAME = ENTITIES.Usuario;
+>>>>>>> 7f1d02af2d7b2eba75b39d4d8a29fa02e7d56ffd
 
   constructor(
     @InjectRepository(Usuario)
@@ -20,6 +25,13 @@ export class UsuariosService implements IService {
     private readonly rolesService: RolesUsuarioService,
     private readonly semestresService: SemestresService,
   ) {}
+<<<<<<< HEAD
+  //servicio de creacion
+  async create(usuario: CreateUsuarioDto) {
+    await this.rolesService.getById(usuario.rolId);
+    const newUsuario: Usuario = this.usuariosRepository.create(usuario);
+    return this.usuariosRepository.save(newUsuario);
+=======
 
   async create(newUsuario: CreateUsuarioDto) {
     const existsRol: boolean = await this.rolesService.existsById(
@@ -36,6 +48,7 @@ export class UsuariosService implements IService {
     }
     const usuario: Usuario = this.usuariosRepository.create(newUsuario);
     return this.usuariosRepository.save(usuario);
+>>>>>>> 7f1d02af2d7b2eba75b39d4d8a29fa02e7d56ffd
   }
 
   getAll() {
