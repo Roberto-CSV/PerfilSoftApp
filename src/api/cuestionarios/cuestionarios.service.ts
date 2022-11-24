@@ -8,6 +8,7 @@ import { SemestresService } from '../semestres/semestres.service';
 import { CreateCuestionarioDto } from './dtos/create_cuestionario.dto';
 import { UpdateCuestionarioDto } from './dtos/update_cuestionario.dto';
 import { Cuestionario } from './entities/cuestionario.entity';
+import { CuestionarioRepository } from './cuestionario.repository';
 
 @Injectable()
 export class CuestionariosService implements IService {
@@ -17,6 +18,7 @@ export class CuestionariosService implements IService {
     @InjectRepository(Cuestionario)
     private readonly cuestionariosRepository: Repository<Cuestionario>,
     private readonly semestresService: SemestresService,
+    private cuestRepo: CuestionarioRepository,
   ) {}
 
   create(newCuestionario: CreateCuestionarioDto): Promise<Cuestionario> {
@@ -79,5 +81,9 @@ export class CuestionariosService implements IService {
       throw notFoundException(id, ENTITIES.Semestre);
     }
     return this.cuestionariosRepository.findBy({ fk_semestre: id });
+  }
+
+  getAllRepo() {
+    return this.cuestRepo.findAllCuestionario();
   }
 }
