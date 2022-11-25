@@ -35,6 +35,14 @@ export class UsuariosController {
     return this.usuariosService.getById(id);
   }
 
+  @Get('validar/:correo/:clave')
+  isValidUser(
+    @Param('correo') correo: string,
+    @Param('clave') clave: string,
+  ) {
+    return this.usuariosService.isValidUser(correo, clave);
+  }
+
   @Get('rol/:id')
   getAllByRolId(@Param('id', ParseIntPipe) id: number): Promise<Usuario[]> {
     return this.usuariosService.getAllByRolId(id);

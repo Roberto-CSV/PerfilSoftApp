@@ -81,6 +81,20 @@ export class UsuariosService implements IService {
     return usuarioFound === null ? false : true;
   }
 
+  async isValidUser(correo: string, clave: string) {
+    const existsUsusario: Usuario = await this.usuariosRepository.findOne({
+      where: {
+        correo: correo,
+        clave: clave
+      }
+    })
+    const response = {
+      usuario: existsUsusario,
+      estado: existsUsusario === null ? false: true
+    }
+    return response
+  }
+
   async getAllByRolId(id: number): Promise<Usuario[]> {
     const existsRol: boolean = await this.rolesService.existsById(id);
     if (!existsRol) {
