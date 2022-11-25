@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { RolIngeniero } from '../rol-ingeniero/entities/rol-ingeniero.entity';
 import { CreateDiagnosticoRolIngenieroDto } from './dto/create-diagnostico-rol-ingeniero.dto';
 import { UpdateDiagnosticoRolIngenieroDto } from './dto/update-diagnostico-rol-ingeniero.dto';
 import { DiagnosticoRolIngeniero } from './entities/diagnostico-rol-ingeniero.entity';
@@ -10,6 +11,8 @@ export class DiagnosticoRolIngenieroService {
   constructor(
     @InjectRepository(DiagnosticoRolIngeniero)
     private readonly diagnosticoRolIngenieroRepository: Repository<DiagnosticoRolIngeniero>,
+    @InjectRepository(RolIngeniero)
+    private readonly rolIngenieroRepository: Repository<RolIngeniero>,
   ) {}
   create(createDiagnosticoRolIngenieroDto: CreateDiagnosticoRolIngenieroDto) {
     const newSemestre: DiagnosticoRolIngeniero =
@@ -31,8 +34,27 @@ export class DiagnosticoRolIngenieroService {
     });
   }
 
-  getAllByDiagnosticoId(id: number) {
-    return this.diagnosticoRolIngenieroRepository.findBy({fk_diagnostico: id})
+  async getAllByDiagnosticoId(id: number) {
+    const diagnosticosRolIngeniero =
+      await this.diagnosticoRolIngenieroRepository.findBy({
+        fk_diagnostico: id,
+      });
+    let response: {
+      diagnosticoRolIngeniero: DiagnosticoRolIngeniero;
+      rolIngeniero: RolIngeniero;
+    }[] = [];
+    for (let diagnosticoRolIngeniero of diagnosticosRolIngeniero) {
+      response.push({
+        diagnosticoRolIngeniero: diagnosticoRolIngeniero,
+        rolIngeniero: await this.rolIngenieroRepository.findOne({
+          where: {
+            id_rol_ingeniero: diagnosticoRolIngeniero.fk_rol_ingeniero,
+          },
+        }),
+      });
+    }
+
+    return response;
   }
 
   update(

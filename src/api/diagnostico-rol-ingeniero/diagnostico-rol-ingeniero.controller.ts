@@ -35,7 +35,7 @@ export class DiagnosticoRolIngenieroController {
   findOne(@Param('id') id: string) {
     return this.diagnosticoRolIngenieroService.findOne(+id);
   }
-  
+
   @Get('diagnostico/:id')
   getAllByDiagnosticoId(@Param('id') id: string) {
     return this.diagnosticoRolIngenieroService.getAllByDiagnosticoId(+id);
