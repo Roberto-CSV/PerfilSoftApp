@@ -36,6 +36,11 @@ export class DiagnosticoRolIngenieroController {
     return this.diagnosticoRolIngenieroService.findOne(+id);
   }
 
+  @Get('diagnostico/:id')
+  getAllByDiagnosticoId(@Param('id') id: string) {
+    return this.diagnosticoRolIngenieroService.getAllByDiagnosticoId(+id);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,

@@ -15,6 +15,7 @@ import { RespuestasCuestionariosService } from '../respuestas_cuestionarios/resp
 import { RolIngenieroHabilidad } from '../rol-ingeniero-habilidad/entities/rol-ingeniero-habilidad.entity';
 import { RolIngeniero } from '../rol-ingeniero/entities/rol-ingeniero.entity';
 import { SeccionCuestionario } from '../seccion_cuestionario/entities/seccion_cuestionario.entity';
+import { UsuariosService } from '../usuarios/usuarios.service';
 import { CreateDiagnosticoDto } from './dtos/create-diagnostico.dto';
 import { UpdateDiagnosticoDto } from './dtos/update-diagnostico.dto';
 import { Diagnostico } from './entities/diagnostico.entity';
@@ -27,6 +28,7 @@ export class DiagnosticosService implements IService {
     @InjectRepository(Diagnostico)
     private readonly diagnosticosRepository: Repository<Diagnostico>,
     private readonly respuestasCuestionariosService: RespuestasCuestionariosService,
+    private readonly usuariosService: UsuariosService,
     @InjectRepository(CuestionarioSeccionCuestionario)
     private readonly cuestionariosSeccionesCuestionarios: Repository<CuestionarioSeccionCuestionario>,
     @InjectRepository(SeccionCuestionario)
@@ -51,7 +53,10 @@ export class DiagnosticosService implements IService {
     const diagnosticoSave: Diagnostico = await this.diagnosticosRepository.save(
       diagnostico,
     );
-    await this.createDiagnosticosRolIngeniero(diagnosticoSave.fk_respuesta_cuestionario, diagnosticoSave.id_diagnostico);
+    await this.createDiagnosticosRolIngeniero(
+      diagnosticoSave.fk_respuesta_cuestionario,
+      diagnosticoSave.id_diagnostico,
+    );
     return diagnosticoSave;
   }
 
@@ -103,7 +108,9 @@ export class DiagnosticosService implements IService {
             diagnosticoRolIngeniero.rolIngeniero.id_rol_ingeniero,
           porcentaje_similitud: diagnosticoRolIngeniero.porcentajeSimilitud,
         });
-      this.diagnosticosRolIngenierosRepository.save(diagnosticoRolIngenieroEntity);
+      this.diagnosticosRolIngenierosRepository.save(
+        diagnosticoRolIngenieroEntity,
+      );
       //diagnosticosRolesIngenieros.push(diagnosticoRolIngenieroEntity);
     }
     //console.log('DIAGNOSTICOS_ROLES_INGENIEROS: ', diagnosticosRolesIngenieros);
@@ -286,4 +293,5 @@ export class DiagnosticosService implements IService {
       where: { fk_respuesta_cuestionario: id },
     });
   }
+
 }
