@@ -22,7 +22,7 @@ export class CuestionarioRepository extends Repository<Cuestionario> {
     let auxInformation: any[];
     let auxInformationDos: any[];
 
-    let sqlSeccionToCuestionario = `select sc.id_seccion_cuestionario  , sc.seccion, h.habilidad, sc.estandar_puntuacion from cuestionario_seccion_cuestionario csc 
+    let sqlSeccionToCuestionario = `select sc.id_seccion_cuestionario, sc.seccion, h.habilidad,h.id_habilidad, sc.estandar_puntuacion from cuestionario_seccion_cuestionario csc 
         left join seccion_cuestionario sc on sc.id_seccion_cuestionario  = csc.fk_seccion_cuestionario  
         left join habilidad h on h.id_habilidad = sc.fk_habilidad where csc.fk_cuestionario = ${id}`;
     auxInformation = await this.query(sqlSeccionToCuestionario);
@@ -35,6 +35,7 @@ export class CuestionarioRepository extends Repository<Cuestionario> {
         seccionCuestionario.habilidad = b.habilidad;
         seccionCuestionario.seccion = b.seccion;
         seccionCuestionario.puntuacion_seccion = b.estandar_puntuacion;
+        seccionCuestionario.id_habilidad = b.id_habilidad;
         let sqlPreguntaforSeccion = `select p.id_pregunta, p.enunciado  from pregunta p where p.fk_seccion_cuestionario = ${b.id_seccion_cuestionario}`;
         auxInformationDos = await this.query(sqlPreguntaforSeccion);
         await Promise.all(

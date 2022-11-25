@@ -2,6 +2,7 @@ export class CuestionariosDto {
   id_cuestionario: number;
   semestre: number;
   puntuacion: number;
+
   seccion_cuestionario: SeccionCuestionario[];
 }
 
@@ -10,6 +11,7 @@ export class SeccionCuestionario {
   seccion: string;
   habilidad: string;
   puntuacion_seccion: number;
+  id_habilidad: number;
   pregunta: Preguntas[];
 }
 export class SeccionCuestionariodto {

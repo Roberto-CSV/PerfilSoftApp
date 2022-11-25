@@ -26,6 +26,14 @@ export class HabilidadesService {
     return this.repoHabilidad.find();
   }
 
+  findOneName(name: string) {
+    return this.repoHabilidad.find({
+      where: {
+        habilidad: name,
+      },
+    });
+  }
+
   findOne(id: number) {
     let habilidadById = null;
     try {

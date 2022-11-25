@@ -25,6 +25,11 @@ export class HabilidadesController {
     return this.habilidadesService.findAll();
   }
 
+  @Get('byName/:name')
+  findAllName(@Param('name') name: string) {
+    return this.habilidadesService.findOneName(name);
+  }
+
   @Get('byId/:id')
   findOne(@Param('id') id: string) {
     return this.habilidadesService.findOne(+id);
