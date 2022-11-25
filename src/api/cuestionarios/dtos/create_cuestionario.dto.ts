@@ -1,4 +1,4 @@
-import { IsNumber } from "class-validator";
+import { IsNumber } from 'class-validator';
 
 export class CreateCuestionarioDto {
   @IsNumber()
@@ -7,4 +7,5 @@ export class CreateCuestionarioDto {
   @IsNumber()
   puntuacion_estandar: number;
 
+  nombre: string;
 }
