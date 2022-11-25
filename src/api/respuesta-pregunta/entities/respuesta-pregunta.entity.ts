@@ -10,4 +10,7 @@ export class RespuestaPregunta {
 
   @Column({ type: 'integer' })
   public fk_opcion_respuesta: number;
+
+  @Column({ type: 'integer' })
+  public puntaje: number;
 }
