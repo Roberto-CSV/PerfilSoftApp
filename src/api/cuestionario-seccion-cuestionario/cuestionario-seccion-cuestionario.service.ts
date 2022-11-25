@@ -34,6 +34,14 @@ export class CuestionarioSeccionCuestionarioService {
     });
   }
 
+  findByCuestionarioId(id: number) {
+    return this.cuestionarioSeccionCuestionarioRepository.findOne({
+      where: {
+        fk_cuestionario: id,
+      },
+    });
+  }
+
   update(
     id_cuestionario_seccion_cuestionario: number,
     updateCuestionarioSeccionCuestionarioDto: UpdateCuestionarioSeccionCuestionarioDto,

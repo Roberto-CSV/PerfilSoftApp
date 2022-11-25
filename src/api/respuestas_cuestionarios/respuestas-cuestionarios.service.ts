@@ -5,6 +5,8 @@ import { ENTITIES } from 'src/shared/utilities/entities';
 import { notFoundException } from 'src/shared/utilities/http-exceptions';
 import { Repository } from 'typeorm';
 import { CuestionariosService } from '../cuestionarios/cuestionarios.service';
+import { CreateDiagnosticoDto } from '../diagnosticos/dtos/create-diagnostico.dto';
+import { Diagnostico } from '../diagnosticos/entities/diagnostico.entity';
 import { UsuariosService } from '../usuarios/usuarios.service';
 import { CreateRespeustaCuestionarioDto } from './dtos/create-respuesta-cuestionario.dto';
 import { RespeustaCuestionario } from './entities/respuesta-cuestionario.entity';
@@ -18,6 +20,8 @@ export class RespuestasCuestionariosService implements IService {
     private readonly respuestasCuestionariosRepository: Repository<RespeustaCuestionario>,
     private readonly cuestionariosService: CuestionariosService,
     private readonly usuariosService: UsuariosService,
+    @InjectRepository(Diagnostico)
+    private readonly diagnosticosRepository: Repository<Diagnostico>,
   ) {}
 
   async create(
@@ -45,7 +49,14 @@ export class RespuestasCuestionariosService implements IService {
     newRespeustaCuestionario.fecha_desarrollo = new Date(Date.now());
     const respuestaCuestionario: RespeustaCuestionario =
       this.respuestasCuestionariosRepository.create(newRespeustaCuestionario);
-    return this.respuestasCuestionariosRepository.save(respuestaCuestionario);
+    const respuestaCuestionarioSave: RespeustaCuestionario =
+      await this.respuestasCuestionariosRepository.save(respuestaCuestionario);
+    const newDiagnostico: Diagnostico = this.diagnosticosRepository.create(<CreateDiagnosticoDto>{
+      fk_respuesta_cuestionario:
+        respuestaCuestionarioSave.id_respuesta_cuestionario,
+    });
+    this.diagnosticosRepository.save(newDiagnostico);
+    return respuestaCuestionarioSave;
   }
 
   getAll(): Promise<RespeustaCuestionario[]> {

@@ -33,6 +33,13 @@ export class DiagnosticosController {
     return this.diagnosticosService.getById(id);
   }
 
+  @Get('pruebas/:id')
+  createDiagnosticosRolIngeniero(
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    return this.diagnosticosService.createDiagnosticosRolIngeniero(id);
+  }
+
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -46,7 +53,7 @@ export class DiagnosticosController {
     return this.diagnosticosService.delete(id);
   }
 
-  @Get('respuesta_cuestonario/:id')
+  @Get('respuesta-cuestonario/:id')
   getByRespuestaCuestionarioId(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<Diagnostico> {
