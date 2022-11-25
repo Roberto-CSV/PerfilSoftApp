@@ -13,6 +13,7 @@ import { RespuestaPregunta } from '../respuesta-pregunta/entities/respuesta-preg
 import { OpcionRespuesta } from '../opcion_respuesta/entities/opcion_respuesta.entity';
 import { Pregunta } from '../pregunta/entities/pregunta.entity';
 import { RolIngenieroHabilidad } from '../rol-ingeniero-habilidad/entities/rol-ingeniero-habilidad.entity';
+import { UsuariosModule } from '../usuarios/usuarios.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { RolIngenieroHabilidad } from '../rol-ingeniero-habilidad/entities/rol-i
       RolIngenieroHabilidad,
     ]),
     RespuestasCuestionariosModule,
+    UsuariosModule
   ],
   providers: [DiagnosticosService],
   exports: [DiagnosticosService],

@@ -51,11 +51,11 @@ export class RespuestasCuestionariosService implements IService {
       this.respuestasCuestionariosRepository.create(newRespeustaCuestionario);
     const respuestaCuestionarioSave: RespeustaCuestionario =
       await this.respuestasCuestionariosRepository.save(respuestaCuestionario);
-    const newDiagnostico: Diagnostico = this.diagnosticosRepository.create(<CreateDiagnosticoDto>{
+    /*const newDiagnostico: Diagnostico = this.diagnosticosRepository.create(<CreateDiagnosticoDto>{
       fk_respuesta_cuestionario:
         respuestaCuestionarioSave.id_respuesta_cuestionario,
     });
-    this.diagnosticosRepository.save(newDiagnostico);
+    this.diagnosticosRepository.save(newDiagnostico);*/
     return respuestaCuestionarioSave;
   }
 
