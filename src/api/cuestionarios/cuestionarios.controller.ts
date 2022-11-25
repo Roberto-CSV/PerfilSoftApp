@@ -29,9 +29,9 @@ export class CuestionariosController {
     return this.cuestionariosService.getAll();
   }
 
-  @Get('all')
-  getAllRepo() {
-    return this.cuestionariosService.getAllRepo();
+  @Get('all/:id')
+  getAllRepo(@Param('id', ParseIntPipe) id: number) {
+    return this.cuestionariosService.getAllRepo(id);
   }
 
   @Get('byId/:id')

@@ -14,7 +14,7 @@ export class CuestionarioRepository extends Repository<Cuestionario> {
     super(Cuestionario, dataSource.createEntityManager());
   }
 
-  async findAllCuestionario() /*: Promise<CuestionariosDto[]> */ {
+  async findAllCuestionario(id: number) /*: Promise<CuestionariosDto[]> */ {
     const cuestionariosDtos: CuestionariosDto[] = [];
     const seccionCuestionarios: SeccionCuestionario[] = [];
     const preguntasDTOS: Preguntas[] = [];
@@ -24,7 +24,7 @@ export class CuestionarioRepository extends Repository<Cuestionario> {
 
     let sqlSeccionToCuestionario = `select sc.id_seccion_cuestionario  , sc.seccion, h.habilidad, sc.estandar_puntuacion from cuestionario_seccion_cuestionario csc 
         left join seccion_cuestionario sc on sc.id_seccion_cuestionario  = csc.fk_seccion_cuestionario  
-        left join habilidad h on h.id_habilidad = sc.fk_habilidad where csc.fk_cuestionario = 1`;
+        left join habilidad h on h.id_habilidad = sc.fk_habilidad where csc.fk_cuestionario = ${id}`;
     auxInformation = await this.query(sqlSeccionToCuestionario);
 
     await Promise.all(

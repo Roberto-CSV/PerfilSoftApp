@@ -83,7 +83,7 @@ export class CuestionariosService implements IService {
     return this.cuestionariosRepository.findBy({ fk_semestre: id });
   }
 
-  getAllRepo() {
-    return this.cuestRepo.findAllCuestionario();
+  getAllRepo(id: number) {
+    return this.cuestRepo.findAllCuestionario(id);
   }
 }
