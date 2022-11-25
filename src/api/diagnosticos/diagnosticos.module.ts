@@ -14,6 +14,7 @@ import { OpcionRespuesta } from '../opcion_respuesta/entities/opcion_respuesta.e
 import { Pregunta } from '../pregunta/entities/pregunta.entity';
 import { RolIngenieroHabilidad } from '../rol-ingeniero-habilidad/entities/rol-ingeniero-habilidad.entity';
 import { UsuariosModule } from '../usuarios/usuarios.module';
+import { Habilidad } from '../habilidades/entities/habilidad.entity';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { UsuariosModule } from '../usuarios/usuarios.module';
       OpcionRespuesta,
       Pregunta,
       RolIngenieroHabilidad,
+      Habilidad
     ]),
     RespuestasCuestionariosModule,
     UsuariosModule

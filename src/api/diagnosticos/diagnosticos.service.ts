@@ -5,7 +5,6 @@ import { ENTITIES } from 'src/shared/utilities/entities';
 import { notFoundException } from 'src/shared/utilities/http-exceptions';
 import { Repository, UpdateResult } from 'typeorm';
 import { CuestionarioSeccionCuestionario } from '../cuestionario-seccion-cuestionario/entities/cuestionario-seccion-cuestionario.entity';
-import { Cuestionario } from '../cuestionarios/entities/cuestionario.entity';
 import { DiagnosticoRolIngeniero } from '../diagnostico-rol-ingeniero/entities/diagnostico-rol-ingeniero.entity';
 import { OpcionRespuesta } from '../opcion_respuesta/entities/opcion_respuesta.entity';
 import { Pregunta } from '../pregunta/entities/pregunta.entity';
@@ -58,6 +57,46 @@ export class DiagnosticosService implements IService {
       diagnosticoSave.id_diagnostico,
     );
     return diagnosticoSave;
+  }
+
+  async getPuntajeSecciones(
+    id_respuesta_cuestionario: number,
+    id_diagnostico: number,
+  ) {
+    const respuestaCuestionario: RespeustaCuestionario =
+      await this.respuestasCuestionariosService.getById(
+        id_respuesta_cuestionario,
+      );
+    const cuestionarioSeccionesCuestionario: CuestionarioSeccionCuestionario[] =
+      await this.cuestionariosSeccionesCuestionarios.findBy({
+        fk_cuestionario: respuestaCuestionario.fk_cuestionario,
+      });
+
+    let seccionesCuestionario: any[] = [];
+    for (let cuestionarioSeccionCuestionario of cuestionarioSeccionesCuestionario) {
+      const seccionCuestionario =
+        await this.seccionesCuestionariosRepository.findOne({
+          where: {
+            id_seccion_cuestionario:
+              cuestionarioSeccionCuestionario.fk_seccion_cuestionario,
+          },
+        });
+      seccionesCuestionario.push(seccionCuestionario);
+    }
+    let puntajesCuestionarios: {
+      seccionCuestionario: SeccionCuestionario,
+      puntaje: number,
+    }[] = [];
+    for (let seccionCuestionario of seccionesCuestionario) {
+      puntajesCuestionarios.push(
+        await this.calcularPuntajeSeccion(
+          id_respuesta_cuestionario,
+          seccionCuestionario,
+        ),
+      );
+    }
+
+    return puntajesCuestionarios;
   }
 
   async createDiagnosticosRolIngeniero(
@@ -293,5 +332,4 @@ export class DiagnosticosService implements IService {
       where: { fk_respuesta_cuestionario: id },
     });
   }
-
 }
