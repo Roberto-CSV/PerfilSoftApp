@@ -31,6 +31,10 @@ export class DiagnosticoRolIngenieroService {
     });
   }
 
+  getAllByDiagnosticoId(id: number) {
+    return this.diagnosticoRolIngenieroRepository.findBy({fk_diagnostico: id})
+  }
+
   update(
     id_diagnostico_rol_ingeniero: number,
     updateDiagnosticoRolIngenieroDto: UpdateDiagnosticoRolIngenieroDto,
