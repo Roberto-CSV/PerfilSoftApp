@@ -40,6 +40,10 @@ export class PreguntaService {
     return pregunta;
   }
 
+  findBySeccionId(id: number) {
+    return this.repoPregunta.findBy({fk_seccion_cuestionario: id})
+  }
+
   update(id: number, updatePreguntaDto: UpdatePreguntaDto) {
     let pregunta = null;
     try {

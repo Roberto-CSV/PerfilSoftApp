@@ -37,6 +37,11 @@ export class CuestionarioSeccionCuestionarioController {
     return this.cuestionarioSeccionCuestionarioService.findOne(+id);
   }
 
+  @Get('byCuestionarioId/:id')
+  findByCuestionarioId(@Param('id') id: string) {
+    return this.cuestionarioSeccionCuestionarioService.findByCuestionarioId(+id);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,

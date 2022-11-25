@@ -5,9 +5,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { RespeustaCuestionario } from './entities/respuesta-cuestionario.entity';
 import { CuestionariosModule } from '../cuestionarios/cuestionarios.module';
 import { UsuariosModule } from '../usuarios/usuarios.module';
+import { DiagnosticosService } from '../diagnosticos/diagnosticos.service';
+import { Diagnostico } from '../diagnosticos/entities/diagnostico.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([RespeustaCuestionario]), CuestionariosModule, UsuariosModule],
+  imports: [TypeOrmModule.forFeature([RespeustaCuestionario, Diagnostico]), CuestionariosModule, UsuariosModule],
   providers: [RespuestasCuestionariosService],
   controllers: [RespuestasCuestionariosController],
   exports: [RespuestasCuestionariosService],
