@@ -35,10 +35,8 @@ export class CuestionarioSeccionCuestionarioService {
   }
 
   findByCuestionarioId(id: number) {
-    return this.cuestionarioSeccionCuestionarioRepository.findOne({
-      where: {
-        fk_cuestionario: id,
-      },
+    return this.cuestionarioSeccionCuestionarioRepository.findBy({
+      fk_cuestionario: id,
     });
   }
 

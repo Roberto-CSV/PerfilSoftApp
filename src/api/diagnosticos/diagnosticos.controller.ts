@@ -33,13 +33,11 @@ export class DiagnosticosController {
     return this.diagnosticosService.getById(id);
   }
 
-  @Get('pruebas/:id')
-  createDiagnosticosRolIngeniero(
-    @Param('id', ParseIntPipe) id: number,
-  ) {
-    return this.diagnosticosService.createDiagnosticosRolIngeniero(id);
-  }
-
+ /* @Get('pruebas-secciones/:id')
+  createDiagnosticosRolIngeniero(@Param('id', ParseIntPipe) id: number) {
+    return this.diagnosticosService.createDiagnosticosRolIngeniero(id, 9);
+  }*/
+  
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
