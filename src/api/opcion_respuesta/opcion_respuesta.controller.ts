@@ -32,6 +32,11 @@ export class OpcionRespuestaController {
     return this.opcionRespuestaService.findOne(+id);
   }
 
+  @Get('byPreguntaId/:id')
+  findBypreguntaId(id: string) {
+    return this.opcionRespuestaService.findBypreguntaId(id);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,

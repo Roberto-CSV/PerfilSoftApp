@@ -44,7 +44,7 @@ export class DiagnosticosService implements IService {
   async createDiagnosticosRolIngeniero(id: number) {
     const cuestionarioSeccionesCuestionario =
       await this.cuestionariosSeccionesCuestionarios.findBy({
-        fk_seccion_cuestionario: id,
+        fk_cuestionario: id,
       });
     let seccionesCuestionario = [];
     for (let cuestionarioSeccionCuestionario of cuestionarioSeccionesCuestionario) {
@@ -54,10 +54,11 @@ export class DiagnosticosService implements IService {
             id_seccion_cuestionario: cuestionarioSeccionCuestionario.fk_seccion_cuestionario
           },
         });
+      seccionesCuestionario.push(seccionCuestionario);
     }
     const rolesIngenieros: RolIngeniero[] =
       await this.rolesIngenierosRepository.find();
-    return cuestionarioSeccionesCuestionario;
+    return seccionesCuestionario;
   }
 
   getAll(): Promise<Diagnostico[]> {

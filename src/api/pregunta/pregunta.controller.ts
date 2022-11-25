@@ -30,6 +30,11 @@ export class PreguntaController {
     return this.preguntaService.findOne(+id);
   }
 
+  @Get('bySeccionId/:id')
+  findBySeccionId(@Param('id') id: string) {
+    return this.preguntaService.findBySeccionId(+id);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,

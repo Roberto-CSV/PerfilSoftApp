@@ -32,6 +32,10 @@ export class OpcionRespuestaService {
     });
   }
 
+  findBypreguntaId(id: string) {
+    return this.repoOpcionRespuesta.findBy({ fk_pregunta: id });
+  }
+
   update(id: number, updateOpcionRespuestaDto: UpdateOpcionRespuestaDto) {
     let opcion = null;
     try {
