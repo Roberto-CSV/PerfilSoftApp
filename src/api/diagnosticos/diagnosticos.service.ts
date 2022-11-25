@@ -61,6 +61,10 @@ export class DiagnosticosService implements IService {
     return seccionesCuestionario;
   }
 
+  
+
+
+
   getAll(): Promise<Diagnostico[]> {
     return this.diagnosticosRepository.find();
   }

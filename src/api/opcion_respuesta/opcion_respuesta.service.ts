@@ -33,6 +33,7 @@ export class OpcionRespuestaService {
   }
 
   findBypreguntaId(id: string) {
+    console.log("Pregunta: ", id)
     return this.repoOpcionRespuesta.findBy({ fk_pregunta: id });
   }
 

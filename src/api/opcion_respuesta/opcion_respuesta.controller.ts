@@ -33,7 +33,8 @@ export class OpcionRespuestaController {
   }
 
   @Get('byPreguntaId/:id')
-  findBypreguntaId(id: string) {
+  findBypreguntaId(@Param('id') id: string) {
+    console.log('Pregunta: ', id);
     return this.opcionRespuestaService.findBypreguntaId(id);
   }
 
