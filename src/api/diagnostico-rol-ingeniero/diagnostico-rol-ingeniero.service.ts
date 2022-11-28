@@ -14,6 +14,7 @@ export class DiagnosticoRolIngenieroService {
     @InjectRepository(RolIngeniero)
     private readonly rolIngenieroRepository: Repository<RolIngeniero>,
   ) {}
+  
   create(createDiagnosticoRolIngenieroDto: CreateDiagnosticoRolIngenieroDto) {
     const newSemestre: DiagnosticoRolIngeniero =
       this.diagnosticoRolIngenieroRepository.create(

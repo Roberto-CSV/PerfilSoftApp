@@ -9,5 +9,6 @@ import { RolIngeniero } from '../rol-ingeniero/entities/rol-ingeniero.entity';
   imports: [TypeOrmModule.forFeature([DiagnosticoRolIngeniero, RolIngeniero])],
   controllers: [DiagnosticoRolIngenieroController],
   providers: [DiagnosticoRolIngenieroService],
+  exports: [DiagnosticoRolIngenieroService],
 })
 export class DiagnosticoRolIngenieroModule {}

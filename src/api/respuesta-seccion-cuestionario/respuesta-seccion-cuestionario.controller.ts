@@ -29,7 +29,7 @@ export class RespuestaSeccionCuestionarioController {
   }
 
   @Get()
-  getAll(): Promise<RespuestaSeccionCuestionario[]> {
+  getAll() {
     return this.respuestasSeccionCuestionarioService.findAll();
   }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { RespuestaPregunta } from '../respuesta-pregunta/entities/respuesta-pregunta.entity';
 import { CreateRespuestaSeccionCuestionarioDto } from './dtos/create-respuesta-seccion-cuestionario.dto';
 import { UpdateRespuestaSeccionCuestionarioDto } from './dtos/update-respuesta-seccion-cuestionario.dto';
 import { RespuestaSeccionCuestionario } from './entities/respuesta-seccion-cuestionario.entity';
@@ -10,6 +11,8 @@ export class RespuestaSeccionCuestionarioService {
   constructor(
     @InjectRepository(RespuestaSeccionCuestionario)
     private readonly respuestaSeccionCuestionarioRepository: Repository<RespuestaSeccionCuestionario>,
+    @InjectRepository(RespuestaPregunta)
+    private readonly respuestaPreguntaRepository: Repository<RespuestaPregunta>,
   ) {}
   async create(
     createRespuestaPreguntaDto: CreateRespuestaSeccionCuestionarioDto,
@@ -24,14 +27,42 @@ export class RespuestaSeccionCuestionarioService {
     );
   }
 
-  findAll() {
-    return this.respuestaSeccionCuestionarioRepository.find();
+  async findAll() {
+    const respuestasSeccionesCuestionario: RespuestaSeccionCuestionario[] =
+      await this.respuestaSeccionCuestionarioRepository.find();
+    const response: any[] = [];
+    for (let respuestaSeccionCuestionario of respuestasSeccionesCuestionario) {
+      const respuestasPreguntas = await this.respuestaPreguntaRepository.findBy(
+        {
+          fk_respuesta_seccion_cuestionario:
+            respuestaSeccionCuestionario.id_respuesta_seccion_cuestionario,
+        },
+      );
+      response.push({
+        respuestaSeccionCuestionario: respuestaSeccionCuestionario,
+        respuestasPreguntas: respuestasPreguntas,
+      });
+    }
+    return response;
   }
 
-  findByRespuestaCuestionarioId(id: number) {
-    return this.respuestaSeccionCuestionarioRepository.findBy({
-      fk_respuesta_cuestionario: id,
-    });
+  async findByRespuestaCuestionarioId(id: number) {
+    const respuestasSeccionesCuestionario: RespuestaSeccionCuestionario[] =
+      await this.respuestaSeccionCuestionarioRepository.findBy({fk_respuesta_cuestionario: id});
+    const response: any[] = [];
+    for (let respuestaSeccionCuestionario of respuestasSeccionesCuestionario) {
+      const respuestasPreguntas = await this.respuestaPreguntaRepository.findBy(
+        {
+          fk_respuesta_seccion_cuestionario:
+            respuestaSeccionCuestionario.id_respuesta_seccion_cuestionario,
+        },
+      );
+      response.push({
+        respuestaSeccionCuestionario: respuestaSeccionCuestionario,
+        respuestasPreguntas: respuestasPreguntas,
+      });
+    }
+    return response;
   }
 
   findBySeccionCuestionarioId(id: number) {
