@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RespuestaPregunta } from '../respuesta-pregunta/entities/respuesta-pregunta.entity';
+import { SeccionCuestionario } from '../seccion_cuestionario/entities/seccion_cuestionario.entity';
 import { CreateRespuestaSeccionCuestionarioDto } from './dtos/create-respuesta-seccion-cuestionario.dto';
 import { UpdateRespuestaSeccionCuestionarioDto } from './dtos/update-respuesta-seccion-cuestionario.dto';
 import { RespuestaSeccionCuestionario } from './entities/respuesta-seccion-cuestionario.entity';
@@ -13,6 +14,8 @@ export class RespuestaSeccionCuestionarioService {
     private readonly respuestaSeccionCuestionarioRepository: Repository<RespuestaSeccionCuestionario>,
     @InjectRepository(RespuestaPregunta)
     private readonly respuestaPreguntaRepository: Repository<RespuestaPregunta>,
+    @InjectRepository(SeccionCuestionario)
+    private readonly seccionCuestionarioRepository: Repository<SeccionCuestionario>,
   ) {}
   async create(
     createRespuestaPreguntaDto: CreateRespuestaSeccionCuestionarioDto,
@@ -48,7 +51,9 @@ export class RespuestaSeccionCuestionarioService {
 
   async findByRespuestaCuestionarioId(id: number) {
     const respuestasSeccionesCuestionario: RespuestaSeccionCuestionario[] =
-      await this.respuestaSeccionCuestionarioRepository.findBy({fk_respuesta_cuestionario: id});
+      await this.respuestaSeccionCuestionarioRepository.findBy({
+        fk_respuesta_cuestionario: id,
+      });
     const response: any[] = [];
     for (let respuestaSeccionCuestionario of respuestasSeccionesCuestionario) {
       const respuestasPreguntas = await this.respuestaPreguntaRepository.findBy(
@@ -58,6 +63,12 @@ export class RespuestaSeccionCuestionarioService {
         },
       );
       response.push({
+        nombreSeccion: this.seccionCuestionarioRepository.findOne({
+          where: {
+            id_seccion_cuestionario:
+              respuestaSeccionCuestionario.fk_seccion_cuestionario,
+          },
+        }),
         respuestaSeccionCuestionario: respuestaSeccionCuestionario,
         respuestasPreguntas: respuestasPreguntas,
       });

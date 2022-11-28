@@ -23,6 +23,14 @@ export class DiagnosticosController {
     return this.diagnosticosService.create(newDiagnostico);
   }
 
+  @Get('all')
+  createDiagnosticoRolesIngeniero() {
+    return this.diagnosticosService.createDiagnosticoRolesIngeniero({
+      id_diagnostico: 36,
+      fk_respuesta_cuestionario: 194,
+    });
+  }
+
   @Get()
   getAll(): Promise<Diagnostico[]> {
     return this.diagnosticosService.getAll();

@@ -16,6 +16,7 @@ import { CreateDiagnosticoRolIngenieroDto } from '../diagnostico-rol-ingeniero/d
 import { SeccionCuestionario } from '../seccion_cuestionario/entities/seccion_cuestionario.entity';
 import { RespuestaCuestionario } from '../respuestas_cuestionarios/entities/respuesta-cuestionario.entity';
 import { CuestionarioSeccionCuestionario } from '../cuestionario-seccion-cuestionario/entities/cuestionario-seccion-cuestionario.entity';
+import { DiagnosticoRolIngeniero } from '../diagnostico-rol-ingeniero/entities/diagnostico-rol-ingeniero.entity';
 
 @Injectable()
 export class DiagnosticosService implements IService {
@@ -103,11 +104,14 @@ export class DiagnosticosService implements IService {
         }
       }
       porcentajeSimilitud /= rolIngeniero.habilidades.length;
-      this.diagnosticoRolIngenenieroService.create({
+      const diagnosticoRolIngeniero: DiagnosticoRolIngeniero = <
+        DiagnosticoRolIngeniero
+      >{
         fk_diagnostico: diagnostico.id_diagnostico,
         fk_rol_ingeniero: rolIngeniero.rolIngeniero.id_rol_ingeniero,
         porcentaje_similitud: porcentajeSimilitud,
-      });
+      };
+      this.diagnosticoRolIngenenieroService.create(diagnosticoRolIngeniero);
       porcentajeSimilitud = 0;
     }
   }

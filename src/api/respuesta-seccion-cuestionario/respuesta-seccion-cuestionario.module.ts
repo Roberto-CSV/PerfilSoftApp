@@ -4,11 +4,18 @@ import { RespuestaSeccionCuestionarioController } from './respuesta-seccion-cues
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RespuestaSeccionCuestionario } from './entities/respuesta-seccion-cuestionario.entity';
 import { RespuestaPregunta } from '../respuesta-pregunta/entities/respuesta-pregunta.entity';
+import { SeccionCuestionario } from '../seccion_cuestionario/entities/seccion_cuestionario.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([RespuestaSeccionCuestionario, RespuestaPregunta])],
+  imports: [
+    TypeOrmModule.forFeature([
+      RespuestaSeccionCuestionario,
+      RespuestaPregunta,
+      SeccionCuestionario,
+    ]),
+  ],
   providers: [RespuestaSeccionCuestionarioService],
   controllers: [RespuestaSeccionCuestionarioController],
-  exports: [RespuestaSeccionCuestionarioService]
+  exports: [RespuestaSeccionCuestionarioService],
 })
 export class RespuestaSeccionCuestionarioModule {}
