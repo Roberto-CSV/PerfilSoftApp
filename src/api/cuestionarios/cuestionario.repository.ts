@@ -17,7 +17,7 @@ export class CuestionarioRepository extends Repository<Cuestionario> {
   async findAllCuestionario(id: number) /*: Promise<CuestionariosDto[]> */ {
     const cuestionariosDtos: CuestionariosDto[] = [];
     const seccionCuestionarios: SeccionCuestionario[] = [];
-    const preguntasDTOS: Preguntas[] = [];
+    let preguntasDTOS: Preguntas[] = [];
     const cuestionario: Cuestionario[] = await this.find();
     let auxInformation: any[];
     let auxInformationDos: any[];
@@ -36,7 +36,7 @@ export class CuestionarioRepository extends Repository<Cuestionario> {
         seccionCuestionario.seccion = b.seccion;
         seccionCuestionario.puntuacion_seccion = b.estandar_puntuacion;
         seccionCuestionario.id_habilidad = b.id_habilidad;
-        let sqlPreguntaforSeccion = `select p.id_pregunta, p.enunciado  from pregunta p where p.fk_seccion_cuestionario = ${b.id_seccion_cuestionario}`;
+        let sqlPreguntaforSeccion = `select p.id_pregunta, p.enunciado  from pregunta p where p.fk_seccion_cuestionario = ${seccionCuestionario.id_seccion}`;
         auxInformationDos = await this.query(sqlPreguntaforSeccion);
         await Promise.all(
           auxInformationDos.map(async (c) => {
@@ -45,12 +45,11 @@ export class CuestionarioRepository extends Repository<Cuestionario> {
             preguntaSeccion.enunciado = c.enunciado;
             let sqlRespuesta = `select opr.id_opcion_respuesta, opr.opcion_respuesta, opr.porcentaje_exactitud  from opcion_respuesta opr where opr.fk_pregunta = ${c.id_pregunta};`;
             preguntaSeccion.respuestas = await this.query(sqlRespuesta);
-
             preguntasDTOS.push(preguntaSeccion);
           }),
         );
         seccionCuestionario.pregunta = preguntasDTOS;
-
+        preguntasDTOS = [];
         seccionCuestionarios.push(seccionCuestionario);
       }),
     );
