@@ -16,10 +16,15 @@ import { TipoHabilidadModule } from './tipo_habilidad/tipo_habilidad.module';
 import { HabilidadesModule } from './habilidades/habilidades.module';
 import { OpcionRespuestaModule } from './opcion_respuesta/opcion_respuesta.module';
 import { PreguntaModule } from './pregunta/pregunta.module';
+import { RespuestaSeccionCuestionarioModule } from './respuesta-seccion-cuestionario/respuesta-seccion-cuestionario.module';
 export const apiRoutes = [
   {
     path: 'usuario',
     module: UsuariosModule,
+  },
+  {
+    path: 'usuario',
+    module: RespuestaSeccionCuestionarioModule,
   },
   {
     path: 'rol',

@@ -5,4 +5,5 @@ export const ENTITIES = {
   Diagnostico: 'diagnostico',
   Cuestionario: 'cuestionario',
   RespeustaCuestionario: 'respuesta_cuestionario',
+  RespuestaSeccionCuestionario: 'respuesta_seccion_cuestionario'
 };

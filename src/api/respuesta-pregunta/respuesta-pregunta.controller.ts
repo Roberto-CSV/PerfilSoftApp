@@ -32,9 +32,11 @@ export class RespuestaPreguntaController {
     return this.respuestaPreguntaService.findOne(+id);
   }
 
-  @Get('byRespuestaCuestionarioId/:id')
-  findByRespuestaCuestionarioId(@Param('id') id: string) {
-    return this.respuestaPreguntaService.findByRespuestaCuestionarioId(+id);
+  @Get('byRespuestaSeccionCuestionarioId/:id')
+  findByRespuestaSeccionCuestionarioId(@Param('id') id: string) {
+    return this.respuestaPreguntaService.findByRespuestaSeccionCuestionarioId(
+      +id,
+    );
   }
 
   @Patch(':id')

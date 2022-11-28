@@ -4,7 +4,7 @@ import { DiagnosticosService } from './diagnosticos.service';
 import { Diagnostico } from './entities/diagnostico.entity';
 import { DiagnosticosController } from './diagnosticos.controller';
 import { RespuestasCuestionariosModule } from '../respuestas_cuestionarios/respuestas-cuestionarios.module';
-import { RespeustaCuestionario } from '../respuestas_cuestionarios/entities/respuesta-cuestionario.entity';
+import { RespuestaCuestionario } from '../respuestas_cuestionarios/entities/respuesta-cuestionario.entity';
 import { RolIngeniero } from '../rol-ingeniero/entities/rol-ingeniero.entity';
 import { DiagnosticoRolIngeniero } from '../diagnostico-rol-ingeniero/entities/diagnostico-rol-ingeniero.entity';
 import { CuestionarioSeccionCuestionario } from '../cuestionario-seccion-cuestionario/entities/cuestionario-seccion-cuestionario.entity';
@@ -20,7 +20,7 @@ import { Habilidad } from '../habilidades/entities/habilidad.entity';
   imports: [
     TypeOrmModule.forFeature([
       Diagnostico,
-      RespeustaCuestionario,
+      RespuestaCuestionario,
       RolIngeniero,
       DiagnosticoRolIngeniero,
       CuestionarioSeccionCuestionario,
@@ -29,10 +29,10 @@ import { Habilidad } from '../habilidades/entities/habilidad.entity';
       OpcionRespuesta,
       Pregunta,
       RolIngenieroHabilidad,
-      Habilidad
+      Habilidad,
     ]),
     RespuestasCuestionariosModule,
-    UsuariosModule
+    UsuariosModule,
   ],
   providers: [DiagnosticosService],
   exports: [DiagnosticosService],

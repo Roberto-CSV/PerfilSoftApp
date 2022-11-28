@@ -33,23 +33,6 @@ export class DiagnosticosController {
     return this.diagnosticosService.getById(id);
   }
 
-  @Get('puntaje-secciones/:respuestaCuestionarioId/:diagnosticoId/')
-  getPuntajeSecciones(
-    @Param('respuestaCuestionarioId', ParseIntPipe)
-    id_respuesta_cuestionario: number,
-    @Param('diagnosticoId', ParseIntPipe) id_diagnostico: number,
-  ) {
-    return this.diagnosticosService.getPuntajeSecciones(
-      id_respuesta_cuestionario,
-      id_diagnostico,
-    );
-  }
-
-  /* @Get('pruebas-secciones/:id')
-  createDiagnosticosRolIngeniero(@Param('id', ParseIntPipe) id: number) {
-    return this.diagnosticosService.createDiagnosticosRolIngeniero(id, 9);
-  }*/
-
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,

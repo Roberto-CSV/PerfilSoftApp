@@ -42,8 +42,10 @@ export class RespuestaPreguntaService {
     return this.respuestaPreguntaRepository.find();
   }
 
-  findByRespuestaCuestionarioId(id: number) {
-    return this.respuestaPreguntaRepository.findBy({fk_respuesta_cuestionario: id})
+  findByRespuestaSeccionCuestionarioId(id: number) {
+    return this.respuestaPreguntaRepository.findBy({
+      fk_respuesta_seccion_cuestionario: id,
+    });
   }
 
   findOne(id: number) {

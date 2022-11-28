@@ -2,14 +2,14 @@ import { ENTITIES } from 'src/shared/utilities/entities';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: ENTITIES.RespeustaCuestionario })
-export class RespeustaCuestionario {
+export class RespuestaCuestionario {
   @PrimaryGeneratedColumn()
   id_respuesta_cuestionario!: number;
 
   @Column({ type: 'integer' })
   fk_cuestionario: number;
 
-  @Column({ type: 'date'})
+  @Column({ type: 'date' })
   fecha_desarrollo: Date;
 
   @Column({ type: 'integer' })

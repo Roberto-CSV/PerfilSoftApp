@@ -18,6 +18,7 @@ import { DiagnosticoRolIngenieroModule } from './diagnostico-rol-ingeniero/diagn
 import { RolIngenieroHabilidadModule } from './rol-ingeniero-habilidad/rol-ingeniero-habilidad.module';
 import { RespuestaPreguntaModule } from './respuesta-pregunta/respuesta-pregunta.module';
 import { CuestionarioSeccionCuestionarioModule } from './cuestionario-seccion-cuestionario/cuestionario-seccion-cuestionario.module';
+import { RespuestaSeccionCuestionarioModule } from './respuesta-seccion-cuestionario/respuesta-seccion-cuestionario.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { CuestionarioSeccionCuestionarioModule } from './cuestionario-seccion-cu
     DiagnosticosModule,
     CuestionariosModule,
     RespuestasCuestionariosModule,
+    RespuestaSeccionCuestionarioModule,
   ],
   controllers: [SemestresController],
 })

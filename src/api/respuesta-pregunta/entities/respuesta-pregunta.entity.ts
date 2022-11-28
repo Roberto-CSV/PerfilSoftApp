@@ -6,7 +6,7 @@ export class RespuestaPregunta {
   public id_respuesta_pregunta: number;
 
   @Column({ type: 'integer' })
-  public fk_respuesta_cuestionario: number;
+  public fk_respuesta_seccion_cuestionario: number;
 
   @Column({ type: 'integer' })
   public fk_opcion_respuesta: number;

@@ -9,61 +9,54 @@ import { CreateDiagnosticoDto } from '../diagnosticos/dtos/create-diagnostico.dt
 import { Diagnostico } from '../diagnosticos/entities/diagnostico.entity';
 import { UsuariosService } from '../usuarios/usuarios.service';
 import { CreateRespeustaCuestionarioDto } from './dtos/create-respuesta-cuestionario.dto';
-import { RespeustaCuestionario } from './entities/respuesta-cuestionario.entity';
+import { RespuestaCuestionario } from './entities/respuesta-cuestionario.entity';
 
 @Injectable()
 export class RespuestasCuestionariosService implements IService {
   private readonly ENTITY_NAME = ENTITIES.RespeustaCuestionario;
 
   constructor(
-    @InjectRepository(RespeustaCuestionario)
-    private readonly respuestasCuestionariosRepository: Repository<RespeustaCuestionario>,
+    @InjectRepository(RespuestaCuestionario)
+    private readonly respuestasCuestionariosRepository: Repository<RespuestaCuestionario>,
     private readonly cuestionariosService: CuestionariosService,
     private readonly usuariosService: UsuariosService,
-    @InjectRepository(Diagnostico)
-    private readonly diagnosticosRepository: Repository<Diagnostico>,
   ) {}
 
   async create(
-    newRespeustaCuestionario: CreateRespeustaCuestionarioDto,
-  ): Promise<RespeustaCuestionario> {
+    newRespuestaCuestionario: CreateRespeustaCuestionarioDto,
+  ): Promise<RespuestaCuestionario> {
     const existsCuestionario: boolean =
       await this.cuestionariosService.existsById(
-        newRespeustaCuestionario.fk_cuestionario,
+        newRespuestaCuestionario.fk_cuestionario,
       );
     const existsUsuario: boolean = await this.usuariosService.existsById(
-      newRespeustaCuestionario.fk_usuario,
+      newRespuestaCuestionario.fk_usuario,
     );
     if (!existsCuestionario) {
       throw notFoundException(
-        newRespeustaCuestionario.fk_cuestionario,
+        newRespuestaCuestionario.fk_cuestionario,
         ENTITIES.Cuestionario,
       );
     }
     if (!existsUsuario) {
       throw notFoundException(
-        newRespeustaCuestionario.fk_usuario,
+        newRespuestaCuestionario.fk_usuario,
         ENTITIES.Usuario,
       );
     }
-    newRespeustaCuestionario.fecha_desarrollo = new Date(Date.now());
-    const respuestaCuestionario: RespeustaCuestionario =
-      this.respuestasCuestionariosRepository.create(newRespeustaCuestionario);
-    const respuestaCuestionarioSave: RespeustaCuestionario =
+    newRespuestaCuestionario.fecha_desarrollo = new Date(Date.now());
+    const respuestaCuestionario: RespuestaCuestionario =
+      this.respuestasCuestionariosRepository.create(newRespuestaCuestionario);
+    const respuestaCuestionarioSave: RespuestaCuestionario =
       await this.respuestasCuestionariosRepository.save(respuestaCuestionario);
-    /*const newDiagnostico: Diagnostico = this.diagnosticosRepository.create(<CreateDiagnosticoDto>{
-      fk_respuesta_cuestionario:
-        respuestaCuestionarioSave.id_respuesta_cuestionario,
-    });
-    this.diagnosticosRepository.save(newDiagnostico);*/
     return respuestaCuestionarioSave;
   }
 
-  getAll(): Promise<RespeustaCuestionario[]> {
+  getAll(): Promise<RespuestaCuestionario[]> {
     return this.respuestasCuestionariosRepository.find();
   }
 
-  async getById(id: number): Promise<RespeustaCuestionario> {
+  async getById(id: number): Promise<RespuestaCuestionario> {
     const existsRespuestaCuestionario: boolean = await this.existsById(id);
     if (!existsRespuestaCuestionario) {
       throw notFoundException(id, this.ENTITY_NAME);
@@ -90,7 +83,7 @@ export class RespuestasCuestionariosService implements IService {
   }
 
   async existsById(id: number): Promise<boolean> {
-    const foundRespuestaCuestionario: RespeustaCuestionario =
+    const foundRespuestaCuestionario: RespuestaCuestionario =
       await this.respuestasCuestionariosRepository.findOne({
         where: {
           id_respuesta_cuestionario: id,
@@ -100,7 +93,7 @@ export class RespuestasCuestionariosService implements IService {
     return foundRespuestaCuestionario === null ? false : true;
   }
 
-  async getAllByCuestionarioId(id: number): Promise<RespeustaCuestionario[]> {
+  async getAllByCuestionarioId(id: number): Promise<RespuestaCuestionario[]> {
     const existsCuestionario: boolean =
       await this.cuestionariosService.existsById(id);
     if (!existsCuestionario) {
@@ -111,7 +104,7 @@ export class RespuestasCuestionariosService implements IService {
     });
   }
 
-  async getAllByUsaurioId(id: number): Promise<RespeustaCuestionario[]> {
+  async getAllByUsaurioId(id: number): Promise<RespuestaCuestionario[]> {
     const existsUsuario: boolean = await this.usuariosService.existsById(id);
     if (!existsUsuario) {
       throw notFoundException(id, ENTITIES.Cuestionario);
