@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateRespuestaSeccionCuestionarioDto } from './dtos/create-respuesta-seccion-cuestionario.dto';
-import { UpdateRespeustaSeccionCuestionarioDto } from './dtos/update-respuesta-seccion-cuestionario.dto';
+import { UpdateRespuestaSeccionCuestionarioDto } from './dtos/update-respuesta-seccion-cuestionario.dto';
 import { RespuestaSeccionCuestionario } from './entities/respuesta-seccion-cuestionario.entity';
 
 @Injectable()
@@ -50,7 +50,7 @@ export class RespuestaSeccionCuestionarioService {
 
   update(
     id_respuesta_seccion_cuestionario: number,
-    updateRespuestaPreguntaDto: UpdateRespeustaSeccionCuestionarioDto,
+    updateRespuestaPreguntaDto: UpdateRespuestaSeccionCuestionarioDto,
   ) {
     return this.respuestaSeccionCuestionarioRepository.update(
       { id_respuesta_seccion_cuestionario },
