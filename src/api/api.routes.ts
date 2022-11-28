@@ -23,7 +23,7 @@ export const apiRoutes = [
     module: UsuariosModule,
   },
   {
-    path: 'usuario',
+    path: 'respuesta-seccion-cuestionario',
     module: RespuestaSeccionCuestionarioModule,
   },
   {
