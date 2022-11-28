@@ -62,7 +62,7 @@ export class RespuestaPreguntaService {
         respuestaSeccionCuestionario.fk_respuesta_cuestionario,
       puntaje: puntajeSeccion,
     };
-    this.respuestaSeccionCuestionarioService.update(
+    await this.respuestaSeccionCuestionarioService.update(
       respuestaSeccionCuestionario.id_respuesta_seccion_cuestionario,
       updateRespeustaSeccionCuestionario,
     );
