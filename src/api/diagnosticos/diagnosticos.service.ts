@@ -111,7 +111,7 @@ export class DiagnosticosService implements IService {
         fk_rol_ingeniero: rolIngeniero.rolIngeniero.id_rol_ingeniero,
         porcentaje_similitud: porcentajeSimilitud,
       };
-      this.diagnosticoRolIngenenieroService.create(diagnosticoRolIngeniero);
+      await this.diagnosticoRolIngenenieroService.create(diagnosticoRolIngeniero);
       porcentajeSimilitud = 0;
     }
   }
