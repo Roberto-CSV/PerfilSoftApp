@@ -63,13 +63,13 @@ export class RespuestaSeccionCuestionarioService {
         },
       );
       response.push({
-        nombreSeccion: this.seccionCuestionarioRepository.findOne({
+        respuestaSeccionCuestionario: respuestaSeccionCuestionario,
+        nombreSeccion: await this.seccionCuestionarioRepository.findOne({
           where: {
             id_seccion_cuestionario:
               respuestaSeccionCuestionario.fk_seccion_cuestionario,
           },
         }),
-        respuestaSeccionCuestionario: respuestaSeccionCuestionario,
         respuestasPreguntas: respuestasPreguntas,
       });
     }
